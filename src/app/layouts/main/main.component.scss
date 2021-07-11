@@ -1,0 +1,14 @@
+.full-nav {
+  @media (min-width: 600px) {
+    padding-left: 200px !important;
+    transition: all ease 400ms;
+  }
+}
+
+.main-content {
+  padding-top: 60px;
+
+  @media (min-width: 600px) {
+    padding-left: 60px;
+  }
+}

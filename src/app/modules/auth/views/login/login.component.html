@@ -1,0 +1,43 @@
+<div class="title">Login</div>
+<div class="example-container">
+  <div class="form-container">
+    <form [formGroup]="form" class="mt-10">
+      <form-input
+        (keyup.enter)="submit($event)"
+        [icon]="'flaticon-write-email-envelope-button'"
+        [type]="'email'"
+        [control]="form.controls.email"
+        [label]="'Email'"
+      >
+      </form-input>
+      <form-input
+        (keyup.enter)="submit($event)"
+        [icon]="'flaticon-locked-padlock-outline'"
+        [type]="'password'"
+        [control]="form.controls.password"
+        [label]="'Password'"
+      ></form-input>
+    </form>
+    <div class="text-right full-width pb-5">
+      <a routerLink="/auth/forgot-password">Forgot password?</a>
+    </div>
+    <div>
+      <button
+        class="btn full-width"
+        light
+        type="submit"
+        style="min-width: 200px"
+        theme="primary"
+        (click)="submit($event)"
+      >
+        Log In
+      </button>
+    </div>
+    <div class="mt-10">
+      New user?
+      <a routerLink="/auth/register" style="margin-left: 10px">
+        create account now.
+      </a>
+    </div>
+  </div>
+</div>

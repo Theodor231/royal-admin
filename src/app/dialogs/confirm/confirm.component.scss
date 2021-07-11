@@ -1,0 +1,83 @@
+.dialog {
+  transition: all ease-in-out 300ms;
+  padding: 0;
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 222222;
+  background-color: rgba(#000, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__container {
+    min-width: 300px;
+    background-color: var(--light);
+    min-height: 150px;
+    position: relative;
+    border-radius: 5px;
+    animation: 0.5s open-dialog;
+  }
+
+  &__content {
+    padding: 20px;
+
+    &--title {
+      font-size: 18px;
+    }
+
+    &--message {
+      margin-top: 10px;
+    }
+  }
+
+  &__actions {
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    border-top: 1px solid var(--light);
+
+    &__buttons {
+      &--no {
+        min-width: 50px;
+        border-radius: 5px;
+      }
+
+      &--yes {
+        border-radius: 5px;
+        min-width: 50px;
+      }
+    }
+  }
+}
+
+.scaled {
+  transform: scale(1.02);
+}
+
+@keyframes scale {
+  0% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes open-dialog {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

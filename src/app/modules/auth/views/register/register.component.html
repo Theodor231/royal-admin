@@ -1,0 +1,52 @@
+<div class="title">Register</div>
+<div class="example-container">
+  <div class="form-container">
+    <form [formGroup]="form" (keydown.enter)="$event.preventDefault()">
+      <form-input
+        [control]="form.controls.name"
+        [label]="'Name'"
+        (keyup.enter)="submit()"
+      ></form-input>
+      <form-input
+        [control]="form.controls.email"
+        [label]="'Email'"
+        (keyup.enter)="submit()"
+      ></form-input>
+      <form-input
+        [type]="'password'"
+        [control]="form.controls.password"
+        [label]="'password'"
+        (keyup.enter)="submit()"
+      >
+      </form-input>
+      <form-input
+        [type]="'password'"
+        [control]="form.controls.confirmPassword"
+        [label]="'Confirm Password'"
+        (keyup.enter)="submit()"
+      ></form-input>
+      <form-select
+        [label]="'Role'"
+        cols="12"
+        [items]="roles"
+        [control]="form.controls.role"
+      >
+      </form-select>
+      <div class="text-right pa-8">
+        <a routerLink="/auth/login"> Go to login </a>
+      </div>
+      <button
+        type="submit"
+        class="btn btn__submit full-width"
+        theme="primary"
+        light
+        type="submit"
+        (click)="submit()"
+      >
+        Register
+      </button>
+    </form>
+  </div>
+</div>
+
+<app-loader></app-loader>

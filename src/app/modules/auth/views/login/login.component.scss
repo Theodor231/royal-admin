@@ -1,0 +1,15 @@
+.example-container {
+  text-align: center;
+  background-color: var(--body);
+}
+
+.form-container {
+  @media (min-width: 500px) {
+    min-width: 400px;
+  }
+  width: 100%;
+}
+
+.form-field {
+  display: block;
+}

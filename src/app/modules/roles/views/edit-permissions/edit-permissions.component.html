@@ -1,0 +1,69 @@
+<div class="content">
+  <div class="card full-width">
+    <div class="actions">
+      <div></div>
+      <div>
+        <button
+          class="btn"
+          (click)="loadData()"
+          [title]="translate('roles.buttons.load_data')"
+        >
+          <icon>refresh</icon>
+        </button>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div>
+        <div
+          *ngFor="let item of permissions; let i = index"
+          class="elevation-1 my-5 pa-8 cursor-pointer d-flex"
+          (click)="expand(item)"
+          [class.selected]="item.module === expandedItem.module"
+        >
+          <div class="ma-0">
+            <span text="text">
+              {{ item.module }}
+            </span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="ml-10" size="32">
+          <span text="text">{{ expandedItem && expandedItem.module }}</span>
+        </div>
+        <div
+          class="transition-all d-flex flex-wrap flex-stretch"
+          *ngIf="expandedItem"
+        >
+          <div
+            *ngFor="let rule of expandedItem.items; let ruleIndex = index"
+            class="pa-20 ma-10 elevation-1"
+          >
+            <div>
+              <label class="d-flex align-center justify-center" size="24" text="text">
+                <input type="checkbox" [(ngModel)]="rule.access" />
+                <span class="ml-8">{{ rule.action }}</span>
+              </label>
+            </div>
+            <div>
+              <select multiple [(ngmodel)]="rule.fields">
+                <option
+                  [value]="item"
+                  *ngFor="let item of rule.availableFields"
+                  (click)="selectFields(item, ruleIndex)"
+                >
+                  {{ item }}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex full-width align-end justify-end">
+      <button class="card__footer--btn card__footer--submit" (click)="submit()">
+        submit
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,96 @@
+<div class="content">
+  <div class="card">
+    <div class="actions my-10">
+      <button
+        routerLink="../../create"
+        class="btn__create icon-button text-nowrap pa-5"
+      >
+        <span class="flaticon-add-plus-button"></span>
+        <icon>add</icon>
+        <span translate="goods.buttons.create" text="text"> Add new data </span>
+      </button>
+      <div class="buttons justify-end align-end">
+        <button
+          size="24"
+          (click)="loadData()"
+          [title]="t('buttons.load_data')"
+        >
+          <icon size="16">refresh</icon>
+        </button>
+        <button
+          size="24"
+          (click)="toggleFilters()"
+          [title]="t('buttons.open_filter')"
+        >
+          <icon size="16">filter_alt</icon>
+        </button>
+      </div>
+    </div>
+    <div class="filter transition-all" *ngIf="showFilters">
+      <div class="filter__content">
+        <form-input
+          cols="12"
+          sm="4"
+          [control]="filter.controls.name"
+          [label]="t('fields.name')"
+          (keyup.enter)="loadData()"
+        ></form-input>
+      </div>
+      <div class="filter__footer">
+        <div class="filter__footer--buttons">
+          <button class="btn" (click)="resetFilter()">
+            <span translate="global_buttons.reset" text="text">reset</span>
+          </button>
+          <button class="btn" theme="primary" (click)="loadData()">
+            <span translate="global_buttons.apply">apply</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <app-table
+      [loading]="loading"
+      [headers]="headers"
+      [items]="items"
+      [pagination]="params"
+      (remove)="removeItem($event)"
+      (changePage)="changePage($event)"
+    >
+      <thead>
+        <tr>
+          <td
+            *ngFor="let header of headers"
+            [style.width]="header.width + 'em' || 'auto'"
+          >
+            {{ header.text }}
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of items">
+          <td *ngFor="let header of headers" [ngSwitch]="header.value">
+            <ng-container *ngSwitchCase="'image'">
+              <button (click)="helpers.download(item[header.value])">
+                <icon size="24">plagiarism</icon>
+              </button>
+            </ng-container>
+            <ng-container *ngSwitchCase="'actions'">
+              <div class="buttons">
+                <button [routerLink]="['../../edit', item.id]">
+                  <icon size="16">edit</icon>
+                </button>
+                <button (click)="openConfirm(item.id)">
+                  <icon size="16" class="buttons__delete">delete</icon>
+                </button>
+              </div>
+            </ng-container>
+            <ng-container *ngSwitchDefault>
+              <span>
+                {{ item[header.value] }}
+              </span>
+            </ng-container>
+          </td>
+        </tr>
+      </tbody>
+    </app-table>
+  </div>
+</div>

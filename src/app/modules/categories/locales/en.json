@@ -1,0 +1,22 @@
+{
+  "categories": {
+    "headers": {
+      "create": "Categories adding",
+      "edit": "Categories editing"
+    },
+    "title": "Categories",
+    "fields": {
+      "title": "Categories",
+      "name": "Name",
+      "email": "Email",
+      "role": "Role",
+      "password": "Password",
+      "image": "Image"
+    },
+    "buttons": {
+      "create": "Add new Categories",
+      "load_data": "Load data",
+      "open_filter": "Open filters"
+    }
+  }
+}

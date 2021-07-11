@@ -1,0 +1,21 @@
+{
+  "goods": {
+    "headers": {
+      "create": "Adaugare Goods",
+      "edit": "Editeare Goods"
+    },
+    "title": "Goods",
+    "fields": {
+      "title": "Users",
+      "name": "Nume",
+      "price": "Pret",
+      "discount": "Reducere",
+      "image": "Imagine"
+    },
+    "buttons": {
+      "create": "Adauga Goods",
+      "load_data": "Incarca datele",
+      "open_filter": "Deschide filtrele"
+    }
+  }
+}

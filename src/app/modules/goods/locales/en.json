@@ -1,0 +1,21 @@
+{
+  "goods": {
+    "headers": {
+      "create": "Goods adding",
+      "edit": "Goods editing"
+    },
+    "title": "Goods",
+    "fields": {
+      "title": "Goods",
+      "name": "Name",
+      "price": "Price",
+      "discount": "Discount",
+      "image": "Image"
+    },
+    "buttons": {
+      "create": "Add new Goods",
+      "load_data": "Load data",
+      "open_filter": "Open filters"
+    }
+  }
+}

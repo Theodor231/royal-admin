@@ -1,0 +1,28 @@
+<div class="dialog" *ngIf="confirmService.showConfirm" (click)="toggleScale()">
+  <div class="dialog__container" [class.scaled]="isScaled">
+    <div class="dialog__content">
+      <div class="dialog__content--title">
+        <strong>{{ confirmService.confirm.title }}</strong>
+      </div>
+      <div text="secondary" class="dialog__content--message">
+        <span>{{ confirmService.confirm.message }}</span>
+      </div>
+    </div>
+    <div class="dialog__actions pt-0">
+      <div class="dialog__actions__buttons">
+        <button
+          color="error"
+          class="dialog__actions__buttons--no"
+          (click)="decline()"
+        >
+          <span class="material-icons">close</span>
+        </button>
+        <button color="success" (click)="confirm()">
+          <span class="material-icons dialog__actions__buttons--yes"
+            >check</span
+          >
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

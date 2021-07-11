@@ -1,0 +1,21 @@
+{
+  "goods": {
+    "headers": {
+      "create": "Добавление Goods",
+      "edit": "Редактирование Goods"
+    },
+    "title": "Goods",
+    "fields": {
+      "title": "Goods",
+      "name": "Имя",
+      "price": "Цена",
+      "discount": "Скидка",
+      "image": "Изображение"
+    },
+    "buttons": {
+      "create": "Добавить Goods",
+      "load_data": "Загрузить данные",
+      "open_filter": "Открыть фильтры"
+    }
+  }
+}

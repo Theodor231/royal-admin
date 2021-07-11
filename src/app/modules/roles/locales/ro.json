@@ -1,0 +1,19 @@
+{
+  "roles": {
+    "headers": {
+      "create": "Adaugare rol",
+      "edit": "Editeare rol"
+    },
+    "title": "Roluri",
+    "fields": {
+      "title": "Roluri",
+      "name": "Nume",
+      "alias": "Alias"
+    },
+    "buttons": {
+      "create": "Adauga rol",
+      "load_data": "Incarca datele",
+      "open_filter": "Deschide filtrele"
+    }
+  }
+}

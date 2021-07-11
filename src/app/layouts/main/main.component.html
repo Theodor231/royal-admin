@@ -1,0 +1,12 @@
+<div class="full-width">
+  <app-header [moduleName]="moduleName"></app-header>
+  <app-side-bar></app-side-bar>
+  <div
+    [class.full-nav]="generalService.showSideBar"
+    class="main-content full-height full-width"
+  >
+    <router-outlet></router-outlet>
+  </div>
+  <app-theme></app-theme>
+</div>
+<app-confirm></app-confirm>

@@ -1,0 +1,38 @@
+{
+  "light": {
+    "--icon-color": "#797979",
+    "--icon-color-side-nav": "#797979",
+    "--primary-light": "#b0b9ec",
+    "--primary-dark": "#4557bb",
+    "--secondary": "#898787",
+    "--success": "#24e05d",
+    "--error": "#ff2525",
+    "--dark": "#343333",
+    "--light": "#fff",
+    "--body": "#fff",
+    "--gray": "#727171",
+    "--light-gray": "#9c9a9a",
+    "--table-color": "#666666",
+    "--table-border": "#555555",
+    "--text": "#000",
+    "--input-text": "#9c9a9a"
+  },
+  "dark": {
+    "--icon-color": "#fff",
+    "--icon-color-side-nav": "#797979",
+    "--primary-light": "#b0b9ec",
+    "--primary-dark": "#4557bb",
+    "--secondary": "#898787",
+    "--success": "#24e05d",
+    "--error": "#ff2525",
+    "--dark": "#343333",
+    "--light": "#fff",
+    "--body": "#1b1919",
+    "--gray": "#727171",
+    "--light-gray": "#9c9a9a",
+    "--table-color": "#666666",
+    "--table-border": "#555555",
+    "--text": "#fff",
+    "--input-text": "#fff"
+  }
+}

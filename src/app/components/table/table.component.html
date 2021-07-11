@@ -1,0 +1,40 @@
+<div class="table-container">
+  <table style="position: relative; min-height: 50px">
+    <app-local-loader [loading]="loading"></app-local-loader>
+    <ng-content></ng-content>
+    <tbody *ngIf="!loading && items.length === 0" class="text-center">
+      <tr class="py-20">
+        <td [attr.colspan]="headers.length" class="py-20">No items.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="full-width d-flex align-center justify-end mt-15">
+  <span> Rows per page: </span>
+  <select
+    [(ngModel)]="pagination.per_page"
+    style="margin-left: 10px"
+    (change)="setPagination()"
+  >
+    <option *ngFor="let item of itemsPerPage" [value]="item" class="pa-5">
+      {{ item }}
+    </option>
+  </select>
+  <span class="mx-20" *ngif="pagination.total">
+    {{ getMinItems }}-{{ getMaxItems }} of {{ pagination.total }}
+  </span>
+  <button
+    [disabled]="pagination.page == '1'"
+    class="mx-10 flaticon-keyboard-left-arrow-button cursor-pointer"
+    (click)="setPage(-1)"
+  >
+    <icon>chevron_left</icon>
+  </button>
+  <button
+    [disabled]="getMaxItems === pagination.total"
+    class="mx-10 cursor-pointer"
+    (click)="setPage(+1)"
+  >
+    <icon>chevron_right</icon>
+  </button>
+</div>

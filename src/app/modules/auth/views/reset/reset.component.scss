@@ -1,0 +1,14 @@
+.example-container {
+  text-align: center;
+}
+
+.form-container {
+  @media (min-width: 500px) {
+    min-width: 400px;
+  }
+  width: 100%;
+}
+
+.form-field {
+  display: block;
+}

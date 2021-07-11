@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="card">
+    <div class="card__header">
+      <div class="card__header--title ml-10" text="text" translate="roles.headers.edit">Edit</div>
+    </div>
+    <div class="card__content mt-10">
+      <form [formGroup]="form" class="form">
+        <form-input
+          cols="12"
+          (keyup.enter)="submit()"
+          class="form__item"
+          [label]="'Name'"
+          [control]="form.controls.name"
+          [error]="errors.name"
+        ></form-input>
+        <form-input
+          (keyup.enter)="submit()"
+          cols="12"
+          class="form__item"
+          [label]="'Alias'"
+          [control]="form.controls.alias"
+          [error]="errors.alias"
+        ></form-input>
+
+        <form-input
+          (keyup.enter)="submit()"
+          cols="12"
+          class="form__item"
+          [label]="'Guard'"
+          [control]="form.controls.guard"
+          [error]="errors.guard"
+        ></form-input>
+        <form-input
+          (keyup.enter)="submit()"
+          cols="12"
+          [icon]="'flaticon-locked-padlock-outline'"
+          class="form__item"
+          [type]="'password'"
+          [label]="'Password'"
+          [control]="form.controls.password"
+          [error]="errors.password"
+        ></form-input>
+      </form>
+    </div>
+    <div class="card__footer">
+      <div>
+        <button
+          class="card__footer--btn card__footer--cancel"
+          routerLink="../../"
+          text="text"
+        >
+          cancel
+        </button>
+        <button
+          class="card__footer--btn card__footer--submit"
+          (click)="submit()"
+        >
+          submit
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

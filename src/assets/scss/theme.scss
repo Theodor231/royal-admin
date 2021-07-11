@@ -1,0 +1,107 @@
+:root {
+  --primary: #3f51b5;
+  --primary-hover: #0101e5;
+  --primary-light: #b0b9ec;
+  --primary-dark: #4557bb;
+  --secondary: #898787;
+  --success: #24e05d;
+  --error: #ff2525;
+  --dark: #343333;
+  --light: #fff;
+  --body: #fff;
+  --gray: #727171;
+  --light-gray: #9c9a9a;
+  --table-color: #666666;
+  --table-border: #555555;
+  --text: #fff;
+}
+
+body {
+  background-color: var(--body);
+}
+
+button[color="error"] {
+  color: var(--error) !important;
+  background-color: initial;
+}
+
+*[color="placeholder"] {
+  color: var(--gray) !important;
+  background-color: initial;
+}
+
+*[color="primary-light"] {
+  background-color: var(--primary-light);
+}
+
+*[text="light"] {
+  color: var(--light);
+}
+
+*[text="dark"] {
+  color: var(--dark);
+}
+
+*[text="primary"] {
+  color: var(--primary);
+}
+
+*[text="error"] {
+  color: var(--error);
+}
+
+*[text="success"] {
+  color: var(--success);
+}
+
+.border-primary {
+  border-color: var(--primary);
+}
+
+*[text="secondary"] {
+  color: var(--secondary);
+}
+
+*[text="text"] {
+  color: var(--text);
+}
+
+button[theme="primary"] {
+  background-color: var(--primary);
+  color: var(--light);
+
+  &:hover {
+    background-color: rgba(var(--primary), 0.6) !important;
+  }
+}
+
+button[color="success"] {
+  color: var(--success) !important;
+  background-color: initial;
+}
+
+*[color="primary"] {
+  background-color: var(--primary);
+}
+
+*[color="secondary"] {
+  background-color: var(--secondary);
+}
+
+*[text="secondary"] {
+  color: var(--secondary);
+}
+
+*[color="success"] {
+  background-color: var(--success);
+}
+
+*[color="error"] {
+  background-color: var(--error);
+}
+*[color="dark"] {
+  background-color: var(--dark);
+}
+*[color="light"] {
+  background-color: var(--light);
+}

@@ -1,0 +1,22 @@
+{
+  "users": {
+    "headers": {
+      "create": "User adding",
+      "edit": "Edit user"
+    },
+    "title": "Users",
+    "fields": {
+      "title": "Users",
+      "name": "Name",
+      "email": "Email",
+      "role": "Role",
+      "password": "Password",
+      "avatar": "Avatar"
+    },
+    "buttons": {
+      "create": "Add new user",
+      "load_data": "Load data",
+      "open_filter": "Open filters"
+    }
+  }
+}

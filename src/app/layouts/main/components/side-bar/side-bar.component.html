@@ -1,0 +1,121 @@
+<div
+  color="dark"
+  class="side-nav mr-2 full-height box-shadow responsive"
+  *ngIf="!generalService.showSideBar"
+  fixed
+  z-index="2"
+>
+  <div class="d-flex align-center flex-column justify-center">
+    <div
+      [routerLink]="nav.link"
+      routerLinkActive="active"
+      *ngFor="let nav of fillerNav"
+      class="side-nav--item full-width d-flex align-center cursor-pointer justify-center"
+    >
+      <div class="side-nav--text d-flex align-center pa-10" [title]="nav.text">
+        <div class="d-flex">
+          <icon>{{ nav.icon }}</icon>
+        </div>
+      </div>
+    </div>
+    <div
+      class="side-nav--item full-width d-flex align-center justify-center cursor-pointer"
+    >
+      <div
+        class="side-nav--text justify-center full-width d-flex align-center pa-10"
+      >
+        <div class="d-flex cursor-pointer" (click)="logout()">
+          <icon>logout</icon>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  *ngIf="generalService.showSideBar"
+  fixed
+  color="dark"
+  class="full-side-nav side-nav full-height mr-2 box-shadow navbar"
+>
+  <div class="d-flex align-center flex-column justify-center">
+    <div
+      [routerLink]="nav.link"
+      routerLinkActive="active"
+      *ngFor="let nav of fillerNav"
+      class="side-nav--item full-width d-flex align-center cursor-pointer justify-center"
+    >
+      <div class="full-width side-nav--text d-flex align-center pa-10">
+        <div class="d-flex align-center">
+          <icon>{{ nav.icon }}</icon>
+          <div class="ml-10">
+            <span translate="{{ nav.link }}.title"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="side-nav--item full-width d-flex align-center justify-center cursor-pointer"
+    >
+      <div
+        class="side-nav--text align-center full-width d-flex align-center pa-10"
+      >
+        <div class="d-flex cursor-pointer align-center" (click)="logout()">
+          <icon>logout</icon>
+          <div class="ml-10">
+            <span translate="logout"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  *ngIf="generalService.showSideBar"
+  fixed
+  color="dark"
+  class="full-side-nav side-nav full-height mr-2 box-shadow responsive-nav"
+>
+  <div class="d-flex align-center flex-column justify-center">
+    <div
+      [routerLink]="nav.link"
+      routerLinkActive="active"
+      *ngFor="let nav of fillerNav"
+      (click)="toggleSideBar()"
+      class="side-nav--item full-width d-flex align-center cursor-pointer justify-center"
+    >
+      <div class="full-width side-nav--text d-flex align-center pa-10">
+        <div class="d-flex align-center">
+          <icon>{{ nav.icon }}</icon>
+          <div class="ml-10">
+            <span translate="{{ nav.link }}.title"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="side-nav--item full-width d-flex align-center justify-center cursor-pointer"
+    >
+      <div
+        class="side-nav--text align-center full-width d-flex align-center pa-10"
+      >
+        <div class="d-flex cursor-pointer align-center" (click)="logout()">
+          <icon>logout</icon>
+          <div class="ml-10">
+            <span translate="logout"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  *ngIf="generalService.showSideBar"
+  class="full-width full-height modal"
+  index="5"
+  modal
+  fixed
+  (click)="toggleSideBar()"
+  style="top: 60px"
+></div>

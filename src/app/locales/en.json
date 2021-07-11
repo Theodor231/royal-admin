@@ -1,0 +1,17 @@
+{
+  "global_buttons": {
+    "apply": "Apply",
+    "reset": "Reset",
+    "delete": "Delete",
+    "loading": "Loading",
+    "cancel": "Cancel",
+    "save": "save"
+  },
+  "global_validation": {
+    "required": "Required field",
+    "minlength": "Min length",
+    "maxlength": "Max length",
+    "min": "Min number",
+    "max": "Max number"
+  }
+}

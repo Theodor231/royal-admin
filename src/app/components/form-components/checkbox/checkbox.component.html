@@ -1,0 +1,26 @@
+<div class="input-block my-5" *ngIf="control">
+  <div
+    class="form__input"
+    [class.required]="
+      control.errors && control.errors.required && control.touched
+    "
+  >
+    <div class="d-flex full-width align-center justify-start">
+      <div [class]="icon" style="font-size: 16px"></div>
+      <input
+        [class.wrong]="control.errors && !control.value && control.touched"
+        type="checkbox"
+        [formControl]="control"
+      />
+      <label class="ml-5" text="text"> {{ label }}</label>
+    </div>
+  </div>
+  <div class="form__error text-left" *ngIf="control.touched">
+    <small
+      class="form__error--text"
+      [class.display-error]="showErrors() || error"
+    >
+      <span> {{ helpers.getErrors(error, control) }} </span>
+    </small>
+  </div>
+</div>

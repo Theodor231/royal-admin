@@ -1,0 +1,17 @@
+{
+  "global_buttons": {
+    "apply": "Применить",
+    "reset": "Сброс",
+    "delete": "Удалить",
+    "loading": "Загрузка",
+    "cancel": "Отмена",
+    "save": "Сохранить"
+  },
+  "global_validation": {
+    "required": "Обязательное поле",
+    "minlength": "Минимальная длина",
+    "maxlength": "Максимальная",
+    "min": "Минимум",
+    "max": "Максимум"
+  }
+}

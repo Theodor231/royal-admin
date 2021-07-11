@@ -1,0 +1,44 @@
+<div class="input-block" *ngIf="control">
+  <div
+    class="form__input"
+    [class.required]="
+      control.errors && control.errors.required && control.touched
+    "
+  >
+    <small *ngIf="control.value" class="form__input--label" text="text"
+      >{{ label }}*</small
+    >
+    <div class="d-flex full-width align-center">
+      <div [class]="icon" style="font-size: 16px"></div>
+      <div class="input-file full-width d-flex align-center" text="text">
+        <span class="material-icons cursor-pointer" (click)="selectFile()"
+          >attach_file</span
+        >
+        <input
+          type="text"
+          readonly
+          text="text"
+          [placeholder]="label"
+          [class.wrong]="control.errors && !control.value && control.touched"
+          [value]="value"
+          (click)="selectFile()"
+        />
+      </div>
+      <input
+        id="fileInput"
+        accept=".jpg, .jpeg, .png"
+        (change)="setFile($event)"
+        type="file"
+        style="visibility: hidden"
+      />
+    </div>
+  </div>
+  <div class="form__error text-left">
+    <small
+      class="form__error--text"
+      [class.display-error]="showErrors() || error"
+    >
+      <span> {{ helpers.getErrors(error, control) }} </span>
+    </small>
+  </div>
+</div>

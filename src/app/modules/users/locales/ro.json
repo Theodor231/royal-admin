@@ -1,0 +1,22 @@
+{
+  "users": {
+    "headers": {
+      "create": "Adaugare utilizator",
+      "edit": "Editeare utilizator"
+    },
+    "title": "Utilizatori",
+    "fields": {
+      "title": "Users",
+      "name": "Nume",
+      "email": "Email",
+      "role": "Rol",
+      "password": "Parola",
+      "avatar": "Avatar"
+    },
+    "buttons": {
+      "create": "Adauga utilizator",
+      "load_data": "Incarca datele",
+      "open_filter": "Deschide filtrele"
+    }
+  }
+}

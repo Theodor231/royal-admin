@@ -1,0 +1,7 @@
+<div>
+  <div *ngFor="let service of services; let i = index">
+    <div [id]="i + 1" [class.deleted]="service._isDeleted">
+      {{ service.name }}
+    </div>
+  </div>
+</div>

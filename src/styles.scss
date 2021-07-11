@@ -1,0 +1,14 @@
+@import "assets/scss/material-icons/material-normal.css";
+@import "assets/scss/reset";
+@import "assets/scss/theme";
+@import "assets/scss/primary";
+@import "assets/scss/global";
+
+body {
+  margin: 0;
+  font-family: "Mark Regular", Roboto, "Helvetica Neue", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth !important;
+}

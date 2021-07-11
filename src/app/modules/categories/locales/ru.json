@@ -1,0 +1,22 @@
+{
+  "categories": {
+    "headers": {
+      "create": "Добавление Categories",
+      "edit": "Редактирование Categories"
+    },
+    "title": "Categories",
+    "fields": {
+      "title": "Categories",
+      "name": "Имя",
+      "email": "Email",
+      "role": "Роль",
+      "password": "Пароль",
+      "image": "Изображение"
+    },
+    "buttons": {
+      "create": "Добавить Categories",
+      "load_data": "Загрузить данные",
+      "open_filter": "Открыть фильтры"
+    }
+  }
+}

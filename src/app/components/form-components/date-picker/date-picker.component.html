@@ -1,0 +1,64 @@
+<div class="input-block" *ngIf="control">
+  <div
+    class="form__input"
+    [class.required]="
+      control.errors && control.errors.required && control.touched
+    "
+  >
+    <small
+      *ngIf="control.value"
+      class="form__input--label"
+      [class.exists]="icon"
+      >{{ label }}*</small
+    >
+    <div class="d-flex full-width align-center">
+      <div style="font-size: 16px" class="mb-5">
+        <span class="material-icons" text="primary">{{ icon }}</span>
+      </div>
+      <div class="full-width d-flex">
+        <input
+          [class.wrong]="control.errors && !control.value && control.touched"
+          [placeholder]="label"
+          type="date"
+          [formControl]="control"
+        />
+      </div>
+    </div>
+
+    <div class="form__error text-left" *ngIf="control.touched">
+      <small
+        class="form__error--text"
+        [class.display-error]="showErrors() || error"
+      >
+        <span> {{ helpers.getErrors(error, control) }} </span>
+      </small>
+    </div>
+  </div>
+</div>
+<div class="full-width box-shadow" style="max-width: 300px" *ngIf="show">
+  <div class="arrows d-flex space-between py-10 align-center">
+    <div>
+      <span class="material-icons cursor-pointer" (click)="changeMonth(-1)"
+        >chevron_left</span
+      >
+    </div>
+    <div>{{ currentDate.format("DD.MM.YYYY") }}</div>
+    <div>
+      <span class="material-icons cursor-pointer" (click)="changeMonth(+1)"
+        >chevron_right</span
+      >
+    </div>
+  </div>
+  <div class="d-flex calendar">
+    <div
+      *ngFor="let day of calendar"
+      style="width: calc(100% / 7)"
+      class="text-center py-15 calendar__item"
+      [class.old-month]="notCurrentMonthDay(day)"
+      [class.current-date]="isCurrentDate(day)"
+      (click)="selectDate(day)"
+    >
+      {{ day.format("DD") }}
+    </div>
+  </div>
+</div>

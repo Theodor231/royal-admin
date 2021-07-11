@@ -1,0 +1,17 @@
+{
+  "global_buttons": {
+    "apply": "Aplica",
+    "reset": "Reseteaza",
+    "delete": "Sterge",
+    "loading": "Loading",
+    "cancel": "Anulează",
+    "save": "Salvează"
+  },
+  "global_validation": {
+    "required": "Camp abligatoriu",
+    "minlength": "Lungime minima",
+    "maxlength": "Lungime maxima",
+    "min": "Minim",
+    "max": "Maxim"
+  }
+}

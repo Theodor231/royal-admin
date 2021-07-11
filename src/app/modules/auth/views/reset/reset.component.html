@@ -1,0 +1,31 @@
+<div class="title">Reset password</div>
+<div class="example-container">
+  <div class="form-container">
+    <form [formGroup]="form" class="mt-10">
+      <form-input
+        [type]="'password'"
+        [control]="form.controls.password"
+        [label]="'New password'"
+        (keyup.enter)="submit($event)"
+      ></form-input>
+      <form-input
+        [type]="'password'"
+        [control]="form.controls.repeat_password"
+        [label]="'Reepat new password'"
+        (keyup.enter)="submit($event)"
+      ></form-input>
+    </form>
+    <button class="btn" routerLink="/auth" style="margin-left: 10px">
+      Go to login
+    </button>
+    <button
+      class="btn"
+      light
+      type="submit"
+      theme="primary"
+      (click)="submit($event)"
+    >
+      Reset
+    </button>
+  </div>
+</div>

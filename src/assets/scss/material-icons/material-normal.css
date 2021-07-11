@@ -1,0 +1,52 @@
+@import "fonts.css";
+
+span[class^="material-icons"] {
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
+}
+
+.material-icons-outlined {
+  font-family: "Material Icons Outlined", serif;
+}
+
+.material-icons-round {
+  font-family: "Material Icons Round", serif;
+}
+
+.material-icons-sharp {
+  font-family: "Material Icons Sharp", serif;
+}
+
+.material-icons-two-tone {
+  font-family: "Material Icons Two Tone", serif;
+}
+
+span[class^="material-icons"][outlined] {
+  font-family: "Material Icons Outlined", serif !important;
+}
+
+span[class^="material-icons"][round] {
+  font-family: "Material Icons Round", sans-serif !important;
+}
+
+span[class^="material-icons"][sharp] {
+  font-family: "Material Icons Sharp", sans-serif !important;
+}
+
+span[class^="material-icons"][two-tone] {
+  font-family: "Material Icons Two Tone", sans-serif !important;
+}
+
+span[class^="material-icons"] {
+  font-family: "Material Icons", sans-serif;
+}

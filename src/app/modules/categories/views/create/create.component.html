@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="card">
+    <div class="card__header">
+      <div class="card__header--title" text="text" translate="categories.headers.create">Create</div>
+    </div>
+    <div class="card__content">
+      <form [formGroup]="form" class="form full-width">
+        <form-input
+          cols="12"
+          (keyup.enter)="submit()"
+          class="form__item"
+          [label]="t('fields.name')"
+          [control]="form.controls.name"
+          [error]="errors.name"
+        ></form-input>
+        <app-file-uploader
+          (keyup.enter)="submit()"
+          cols="12"
+          class="form__item"
+          [label]="t('fields.image')"
+          [control]="form.controls.image"
+          [error]="errors.image"
+        ></app-file-uploader>
+      </form>
+    </div>
+    <div class="card__footer">
+      <div>
+        <button
+          class="card__footer--btn card__footer--cancel"
+          routerLink="../"
+          translate="global_buttons.cancel"
+          text="text"
+        >
+          cancel
+        </button>
+        <button
+          [disabled]="loading"
+          theme="primary"
+          class="card__footer--btn"
+          (click)="submit()"
+          translate="global_buttons.save"
+        >
+          submit
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+{
+  "roles": {
+    "headers": {
+      "create": "Role adding",
+      "edit": "Role Editing"
+    },
+    "title": "Roles",
+    "fields": {
+      "title": "Users en",
+      "name": "Name",
+      "alias": "Alias"
+    },
+    "buttons": {
+      "create": "Add new role",
+      "load_data": "Load data",
+      "open_filter": "Open filters"
+    }
+  }
+}
