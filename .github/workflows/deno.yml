@@ -1,0 +1,32 @@
+  
+on:
+  push:
+    branches:
+      - main
+
+name: deploy
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v2
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2.1.5
+      - run: npm i
+      - run: npm run build
+      - name: Set up key
+        run: set -eu
+      - run: mkdir "$HOME/.ssh"
+      - run: echo "${{ secrets.key }}" > "$HOME/.ssh/key"
+      - run: chmod 600 "$HOME/.ssh/key"
+      - name: Sync
+        shell: bash
+        env:
+          USER: ${{ secrets.user }}
+          HOST: ${{ secrets.host }}
+          DIST: ${{ secrets.dist }}
+        run: |
+          rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" -avz * $USER@$HOST:$DIST
+          ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no $USER@$HOST "service nginx restart"
