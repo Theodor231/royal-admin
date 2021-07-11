@@ -28,5 +28,5 @@ jobs:
           HOST: ${{ secrets.host }}
           DIST: ${{ secrets.dist }}
         run: |
-          rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" -avz * $USER@$HOST:$DIST
+          rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" -avz dist/* $USER@$HOST:$DIST
           ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no $USER@$HOST "service nginx restart"
