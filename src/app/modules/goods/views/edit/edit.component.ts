@@ -17,6 +17,8 @@ export class EditComponent implements OnInit {
   credentials = JSON.parse(localStorage.getItem('credentials')) || null;
   module = 'goods';
 
+  categories = [] as Array<any>;
+
   constructor(
     private formBuilder: FormBuilder,
     private api: ApiService,
@@ -26,6 +28,17 @@ export class EditComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.createForm();
+    this.getCategories();
+    this.route.params.subscribe((param: any) => {
+      if (param?.id) {
+        this.id = param.id;
+        this.getItem();
+      }
+    });
+  }
+
+  createForm(): void {
     this.form = this.formBuilder.group({
       name_ro: [
         null,
@@ -81,12 +94,7 @@ export class EditComponent implements OnInit {
         null,
         [Validators.minLength(10), Validators.maxLength(2000)],
       ],
-    });
-    this.route.params.subscribe((param: any) => {
-      if (param?.id) {
-        this.id = param.id;
-        this.getItem();
-      }
+      categoryId: [null, [Validators.required]],
     });
   }
 
@@ -136,5 +144,19 @@ export class EditComponent implements OnInit {
 
   t(locale: string): string {
     return this.helpers.localization().translate(`${this.module}.${locale}`);
+  }
+
+  getCategories(): void {
+    this.api
+      .categories()
+      .getList()
+      .subscribe(
+        (response: any) => {
+          this.categories = response;
+        },
+        (e) => {
+          this.helpers.alert().showError(e.message);
+        }
+      );
   }
 }

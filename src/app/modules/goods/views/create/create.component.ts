@@ -18,6 +18,7 @@ export class CreateComponent implements OnInit {
   roles = [] as Array<any>;
   module = 'goods';
   services = [];
+  categories = [] as Array<any>;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -28,6 +29,40 @@ export class CreateComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.createForm();
+    this.getCategories();
+  }
+
+  async submit(): Promise<void> {
+    if (!this.form.valid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+    this.loading = true;
+    await this.api[this.module]()
+      .create(this.helpers.toFormData(this.form.value))
+      .subscribe(
+        () => {
+          this.helpers.alert().showSuccess('Successful created');
+          this.router.navigateByUrl(`/ro/${this.module}`);
+        },
+        (e) => {
+          if (e.error.hasOwnProperty('errors')) {
+            this.errors = e.error.errors;
+            setTimeout(() => {
+              this.errors = {};
+            }, 5000);
+          }
+          this.helpers.alert().showError(e.error.message);
+          this.loading = false;
+        },
+        () => {
+          this.loading = false;
+        }
+      );
+  }
+
+  createForm(): void {
     this.form = this.formBuilder.group({
       name_ro: [
         null,
@@ -83,36 +118,8 @@ export class CreateComponent implements OnInit {
         null,
         [Validators.minLength(10), Validators.maxLength(2000)],
       ],
+      categoryId: [null, [Validators.required]],
     });
-  }
-
-  async submit(): Promise<void> {
-    if (!this.form.valid) {
-      this.form.markAllAsTouched();
-      return;
-    }
-    this.loading = true;
-    await this.api[this.module]()
-      .create(this.helpers.toFormData(this.form.value))
-      .subscribe(
-        () => {
-          this.helpers.alert().showSuccess('Successful created');
-          this.router.navigateByUrl(`/ro/${this.module}`);
-        },
-        (e) => {
-          if (e.error.hasOwnProperty('errors')) {
-            this.errors = e.error.errors;
-            setTimeout(() => {
-              this.errors = {};
-            }, 5000);
-          }
-          this.helpers.alert().showError(e.error.message);
-          this.loading = false;
-        },
-        () => {
-          this.loading = false;
-        }
-      );
   }
 
   changeStatus(): void {
@@ -121,6 +128,20 @@ export class CreateComponent implements OnInit {
     setTimeout(() => {
       this.scrollToFirstInvalidControl();
     }, 2000);
+  }
+
+  getCategories(): void {
+    this.api
+      .categories()
+      .getList()
+      .subscribe(
+        (response: any) => {
+          this.categories = response;
+        },
+        (e) => {
+          this.helpers.alert().showError(e.message);
+        }
+      );
   }
 
   private scrollToFirstInvalidControl(): void {
