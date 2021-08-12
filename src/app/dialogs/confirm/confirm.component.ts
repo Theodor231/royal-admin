@@ -1,10 +1,10 @@
-import { Component } from "@angular/core";
-import { ConfirmService } from "../../_services/helpers/confirm.service";
+import { Component } from '@angular/core';
+import { ConfirmService } from '../../_services/helpers/confirm.service';
 
 @Component({
-  selector: "app-confirm",
-  templateUrl: "./confirm.component.html",
-  styleUrls: ["./confirm.component.scss"],
+  selector: 'app-confirm',
+  templateUrl: './confirm.component.html',
+  styleUrls: ['./confirm.component.scss'],
 })
 export class ConfirmComponent {
   isScaled = false as boolean;

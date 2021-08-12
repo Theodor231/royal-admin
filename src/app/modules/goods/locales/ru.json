@@ -1,19 +1,27 @@
 {
   "goods": {
     "headers": {
-      "create": "Добавление Goods",
-      "edit": "Редактирование Goods"
+      "create": "Добавление товара",
+      "edit": "Редактирование товара"
     },
-    "title": "Goods",
+    "title": "Товары",
     "fields": {
-      "title": "Goods",
-      "name": "Имя",
+      "title": "Товар",
+      "name_ro": "Название RO",
+      "name_en": "Название EN",
+      "name_ru": "Название RU",
       "price": "Цена",
       "discount": "Скидка",
-      "image": "Изображение"
+      "image": "Изображение",
+      "description_ro": "Описание RO",
+      "description_en": "Описание EN",
+      "description_ru": "Описание RU",
+      "height": "Высота",
+      "width": "Ширина",
+      "length": "Длина"
     },
     "buttons": {
-      "create": "Добавить Goods",
+      "create": "Добавить товар",
       "load_data": "Загрузить данные",
       "open_filter": "Открыть фильтры"
     }

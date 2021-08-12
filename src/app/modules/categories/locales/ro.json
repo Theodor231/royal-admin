@@ -7,7 +7,9 @@
     "title": "Categories",
     "fields": {
       "title": "Users",
-      "name": "Nume",
+      "name_ro": "Nume RO",
+      "name_en": "Nume EN",
+      "name_ru": "Nume RU",
       "email": "Email",
       "role": "Rol",
       "password": "Parola",

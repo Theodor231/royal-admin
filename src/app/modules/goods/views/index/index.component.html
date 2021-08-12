@@ -10,11 +10,7 @@
         <span translate="goods.buttons.create" text="text"> Add new data </span>
       </button>
       <div class="buttons justify-end align-end">
-        <button
-          size="24"
-          (click)="loadData()"
-          [title]="t('buttons.load_data')"
-        >
+        <button size="24" (click)="loadData()" [title]="t('buttons.load_data')">
           <icon size="16">refresh</icon>
         </button>
         <button
@@ -31,8 +27,22 @@
         <form-input
           cols="12"
           sm="4"
-          [control]="filter.controls.name"
-          [label]="t('fields.name')"
+          [control]="filter.controls.name_ro"
+          [label]="t('fields.name_ro')"
+          (keyup.enter)="loadData()"
+        ></form-input>
+        <form-input
+          cols="12"
+          sm="4"
+          [control]="filter.controls.name_en"
+          [label]="t('fields.name_en')"
+          (keyup.enter)="loadData()"
+        ></form-input>
+        <form-input
+          cols="12"
+          sm="4"
+          [control]="filter.controls.name_ru"
+          [label]="t('fields.name_ru')"
           (keyup.enter)="loadData()"
         ></form-input>
       </div>

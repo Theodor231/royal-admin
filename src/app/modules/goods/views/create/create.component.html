@@ -1,7 +1,13 @@
 <div class="container">
-  <div class="card">
+  <div class="card full-width" style="max-width: 900px">
     <div class="card__header">
-      <div class="card__header--title" text="text" translate="goods.headers.create">Create</div>
+      <div
+        class="card__header--title"
+        text="text"
+        translate="goods.headers.create"
+      >
+        Create
+      </div>
     </div>
     <div class="card__content">
       <form [formGroup]="form" class="form">
@@ -9,12 +15,28 @@
           cols="12"
           (keyup.enter)="submit()"
           class="form__item"
-          [label]="t('fields.name')"
-          [control]="form.controls.name"
-          [error]="errors.name"
+          [label]="t('fields.name_ro')"
+          [control]="form.controls.name_ro"
+          [error]="errors.name_ro"
         ></form-input>
         <form-input
           cols="12"
+          (keyup.enter)="submit()"
+          class="form__item"
+          [label]="t('fields.name_en')"
+          [control]="form.controls.name_en"
+          [error]="errors.name_en"
+        ></form-input>
+        <form-input
+          cols="12"
+          (keyup.enter)="submit()"
+          class="form__item"
+          [label]="t('fields.name_ru')"
+          [control]="form.controls.name_ru"
+          [error]="errors.name_ru"
+        ></form-input>
+        <form-input
+          cols="4"
           (keyup.enter)="submit()"
           class="form__item"
           type="number"
@@ -23,7 +45,7 @@
           [error]="errors.price"
         ></form-input>
         <form-input
-          cols="12"
+          cols="4"
           (keyup.enter)="submit()"
           class="form__item"
           [label]="t('fields.discount')"
@@ -32,12 +54,63 @@
         ></form-input>
         <app-file-uploader
           (keyup.enter)="submit()"
-          cols="12"
+          cols="4"
           class="form__item"
           [label]="t('fields.image')"
           [control]="form.controls.image"
           [error]="errors.image"
         ></app-file-uploader>
+        <form-input
+          cols="4"
+          (keyup.enter)="submit()"
+          class="form__item"
+          type="number"
+          [label]="t('fields.height')"
+          [control]="form.controls.height"
+          [error]="errors.height"
+        ></form-input>
+        <form-input
+          cols="4"
+          (keyup.enter)="submit()"
+          class="form__item"
+          type="number"
+          [label]="t('fields.width')"
+          [control]="form.controls.width"
+          [error]="errors.width"
+        ></form-input>
+        <form-input
+          cols="4"
+          (keyup.enter)="submit()"
+          class="form__item"
+          type="number"
+          [label]="t('fields.length')"
+          [control]="form.controls.length"
+          [error]="errors.length"
+        ></form-input>
+        <form-input
+          cols="12"
+          (keyup.enter)="submit()"
+          class="form__item"
+          [label]="t('fields.description_ro')"
+          [control]="form.controls.description_ro"
+          [error]="errors.description_ro"
+        ></form-input>
+        <form-input
+          cols="12"
+          (keyup.enter)="submit()"
+          class="form__item"
+          [label]="t('fields.description_en')"
+          [control]="form.controls.description_en"
+          [error]="errors.description_en"
+        ></form-input>
+        <form-input
+          cols="12"
+          (keyup.enter)="submit()"
+          class="form__item"
+          [label]="t('fields.description_ru')"
+          [control]="form.controls.description_ru"
+          [error]="errors.description_ru"
+        ></form-input>
       </form>
     </div>
     <div class="card__footer">

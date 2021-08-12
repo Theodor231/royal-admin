@@ -9,7 +9,7 @@ import { AppInterceptor } from './app.interceptor';
 import { LoaderService } from './_services/helpers/loader.service';
 import { ComponentsModule } from './components/components.module';
 import { DirectivesModule } from './directives/directives.module';
-import {RouterModule, Routes} from "@angular/router";
+import {RouterModule, Routes} from '@angular/router';
 
 const routes: Routes = [
   {

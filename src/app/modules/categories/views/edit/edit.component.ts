@@ -15,7 +15,7 @@ export class EditComponent implements OnInit {
   errors = {} as any;
   id: number;
   credentials = JSON.parse(localStorage.getItem('credentials')) || null;
-  module = 'categories'
+  module = 'categories';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -23,11 +23,13 @@ export class EditComponent implements OnInit {
     private helpers: HelpersService,
     private route: ActivatedRoute,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      name: [null, Validators.required],
+      name_ro: [null, Validators.required],
+      name_en: [null, Validators.required],
+      name_ru: [null, Validators.required],
       image: [null, Validators.required],
     });
     this.route.params.subscribe((param: any) => {
@@ -44,8 +46,7 @@ export class EditComponent implements OnInit {
     }
 
     this.loading = true;
-    this.api
-      [this.module]()
+    this.api[this.module]()
       .edit(this.id, this.helpers.toFormData(this.form.value))
       .subscribe(
         () => {
@@ -66,8 +67,7 @@ export class EditComponent implements OnInit {
 
   getItem(): void {
     this.loading = true;
-    this.api
-      [this.module]()
+    this.api[this.module]()
       .getForEdit(this.id)
       .subscribe(
         (response: any) => {

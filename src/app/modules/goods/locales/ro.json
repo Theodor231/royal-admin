@@ -1,19 +1,27 @@
 {
   "goods": {
     "headers": {
-      "create": "Adaugare Goods",
-      "edit": "Editeare Goods"
+      "create": "Adaugare marfă",
+      "edit": "Editeare marfă"
     },
-    "title": "Goods",
+    "title": "Marfă",
     "fields": {
-      "title": "Users",
-      "name": "Nume",
+      "title": "Marfă",
+      "name_ro": "Nume RO",
+      "name_en": "Nume EN",
+      "name_ru": "Nume RU",
       "price": "Pret",
       "discount": "Reducere",
-      "image": "Imagine"
+      "image": "Imagine",
+      "description_ro": "Descriere RO",
+      "description_en": "Descriere EN",
+      "description_ru": "Descriere RU",
+      "height": "Înălţime",
+      "width": "Lăţime",
+      "length": "Lungime"
     },
     "buttons": {
-      "create": "Adauga Goods",
+      "create": "Adauga marfă",
       "load_data": "Incarca datele",
       "open_filter": "Deschide filtrele"
     }

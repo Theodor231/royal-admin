@@ -96,7 +96,7 @@ export class EditComponent implements OnInit {
         (response: any) => {
           const formData = this.helpers.setForm(response, this.form);
           console.log();
-          
+
           this.form.setValue({ ...formData });
           this.loading = false;
         },

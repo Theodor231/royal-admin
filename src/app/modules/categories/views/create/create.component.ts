@@ -11,11 +11,12 @@ import { HelpersService } from 'src/app/_services/helpers.service';
 })
 export class CreateComponent implements OnInit {
   form: FormGroup;
-  emailRegx = /^(([^<>+()\[\]\\.,;:\s@"-#$%&=]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/;
+  emailRegx =
+    /^(([^<>+()\[\]\\.,;:\s@"-#$%&=]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/;
   loading = false as boolean;
   errors = {} as any;
   roles = [] as Array<any>;
-  module = 'categories'
+  module = 'categories';
   services = [];
 
   constructor(
@@ -24,11 +25,13 @@ export class CreateComponent implements OnInit {
     private helpers: HelpersService,
     private router: Router,
     private el: ElementRef
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      name: [null, Validators.required],
+      name_ro: [null, Validators.required],
+      name_en: [null, Validators.required],
+      name_ru: [null, Validators.required],
       image: [null, Validators.required],
     });
   }
@@ -39,8 +42,7 @@ export class CreateComponent implements OnInit {
       return;
     }
     this.loading = true;
-    await this.api
-    [this.module]()
+    await this.api[this.module]()
       .create(this.helpers.toFormData(this.form.value))
       .subscribe(
         () => {
@@ -52,7 +54,7 @@ export class CreateComponent implements OnInit {
             this.errors = e.error.errors;
             setTimeout(() => {
               this.errors = {};
-            }, 5000);
+            }, 4000);
           }
           this.helpers.alert().showError(e.error.message);
           this.loading = false;
@@ -72,9 +74,8 @@ export class CreateComponent implements OnInit {
   }
 
   private scrollToFirstInvalidControl(): void {
-    const firstInvalidControl: HTMLElement = this.el.nativeElement.querySelector(
-      'form .ng-invalid'
-    );
+    const firstInvalidControl: HTMLElement =
+      this.el.nativeElement.querySelector('form .ng-invalid');
 
     firstInvalidControl.focus(); // without smooth behavior
   }

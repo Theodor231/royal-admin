@@ -15,7 +15,7 @@ export class EditComponent implements OnInit {
   errors = {} as any;
   id: number;
   credentials = JSON.parse(localStorage.getItem('credentials')) || null;
-  module = 'goods'
+  module = 'goods';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -23,14 +23,64 @@ export class EditComponent implements OnInit {
     private helpers: HelpersService,
     private route: ActivatedRoute,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      name: [null, [Validators.required, Validators.min(2), Validators.max(100)]],
+      name_ro: [
+        null,
+        [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(100),
+        ],
+      ],
+      name_en: [
+        null,
+        [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(100),
+        ],
+      ],
+      name_ru: [
+        null,
+        [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(100),
+        ],
+      ],
       image: [null, Validators.required],
-      price: [null, [Validators.min(0.1), Validators.max(100000), Validators.required]],
+      price: [
+        null,
+        [Validators.min(0.1), Validators.max(100000), Validators.required],
+      ],
+      height: [
+        null,
+        [Validators.min(0.1), Validators.max(100000), Validators.required],
+      ],
+      width: [
+        null,
+        [Validators.min(0.1), Validators.max(100000), Validators.required],
+      ],
+      length: [
+        null,
+        [Validators.min(0.1), Validators.max(100000), Validators.required],
+      ],
       discount: [null, [Validators.min(0), Validators.max(100)]],
+      description_ro: [
+        null,
+        [Validators.minLength(10), Validators.maxLength(2000)],
+      ],
+      description_en: [
+        null,
+        [Validators.minLength(10), Validators.maxLength(2000)],
+      ],
+      description_ru: [
+        null,
+        [Validators.minLength(10), Validators.maxLength(2000)],
+      ],
     });
     this.route.params.subscribe((param: any) => {
       if (param?.id) {
@@ -46,8 +96,7 @@ export class EditComponent implements OnInit {
     }
 
     this.loading = true;
-    this.api
-    [this.module]()
+    this.api[this.module]()
       .edit(this.id, this.helpers.toFormData(this.form.value))
       .subscribe(
         () => {
@@ -68,8 +117,7 @@ export class EditComponent implements OnInit {
 
   getItem(): void {
     this.loading = true;
-    this.api
-    [this.module]()
+    this.api[this.module]()
       .getForEdit(this.id)
       .subscribe(
         (response: any) => {

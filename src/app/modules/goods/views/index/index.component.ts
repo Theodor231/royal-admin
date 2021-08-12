@@ -14,7 +14,7 @@ export class IndexComponent implements OnInit {
   headers = [] as Array<any>;
   loading = false;
   showFilters = false;
-  module = 'goods'
+  module = 'goods';
 
   filter: FormGroup;
 
@@ -57,8 +57,7 @@ export class IndexComponent implements OnInit {
 
     params.filter = JSON.stringify(params.filter);
 
-    this.api
-      [this.module]()
+    this.api[this.module]()
       .getData(params)
       .subscribe(
         (data: any) => {
@@ -81,8 +80,7 @@ export class IndexComponent implements OnInit {
 
   removeItem(id: number): void {
     this.loading = true;
-    this.api
-      [this.module]()
+    this.api[this.module]()
       .delete(id)
       .subscribe(
         (response) => {
@@ -104,8 +102,9 @@ export class IndexComponent implements OnInit {
 
   createForm(): void {
     this.filter = this.formBuilder.group({
-      name: [null],
-      email: [null],
+      name_ro: [null],
+      name_en: [null],
+      name_ru: [null],
     });
   }
 

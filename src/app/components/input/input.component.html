@@ -16,13 +16,12 @@
       />
     </div>
   </div>
-  <div class="form__error text-left">
+  <span class="form__error text-left">
     <small
       class="form__error--text"
       [class.display-error]="showErrors() || error"
     >
-    {{error |json}}
       <span> {{ helpers.getErrors(error, control) }} </span>
     </small>
-  </div>
+  </span>
 </div>

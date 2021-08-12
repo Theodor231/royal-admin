@@ -11,11 +11,12 @@ import { HelpersService } from 'src/app/_services/helpers.service';
 })
 export class CreateComponent implements OnInit {
   form: FormGroup;
-  emailRegx = /^(([^<>+()\[\]\\.,;:\s@"-#$%&=]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/;
+  emailRegx =
+    /^(([^<>+()\[\]\\.,;:\s@"-#$%&=]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/;
   loading = false as boolean;
   errors = {} as any;
   roles = [] as Array<any>;
-  module = 'goods'
+  module = 'goods';
   services = [];
 
   constructor(
@@ -28,10 +29,60 @@ export class CreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      name: [null, [Validators.required, Validators.min(2), Validators.max(100)]],
+      name_ro: [
+        null,
+        [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(100),
+        ],
+      ],
+      name_en: [
+        null,
+        [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(100),
+        ],
+      ],
+      name_ru: [
+        null,
+        [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(100),
+        ],
+      ],
       image: [null, Validators.required],
-      price: [null, [Validators.min(0.1), Validators.max(100000), Validators.required]],
+      price: [
+        null,
+        [Validators.min(0.1), Validators.max(100000), Validators.required],
+      ],
+      height: [
+        null,
+        [Validators.min(0.1), Validators.max(100000), Validators.required],
+      ],
+      width: [
+        null,
+        [Validators.min(0.1), Validators.max(100000), Validators.required],
+      ],
+      length: [
+        null,
+        [Validators.min(0.1), Validators.max(100000), Validators.required],
+      ],
       discount: [null, [Validators.min(0), Validators.max(100)]],
+      description_ro: [
+        null,
+        [Validators.minLength(10), Validators.maxLength(2000)],
+      ],
+      description_en: [
+        null,
+        [Validators.minLength(10), Validators.maxLength(2000)],
+      ],
+      description_ru: [
+        null,
+        [Validators.minLength(10), Validators.maxLength(2000)],
+      ],
     });
   }
 
@@ -41,8 +92,7 @@ export class CreateComponent implements OnInit {
       return;
     }
     this.loading = true;
-    await this.api
-      [this.module]()
+    await this.api[this.module]()
       .create(this.helpers.toFormData(this.form.value))
       .subscribe(
         () => {
@@ -74,9 +124,8 @@ export class CreateComponent implements OnInit {
   }
 
   private scrollToFirstInvalidControl(): void {
-    const firstInvalidControl: HTMLElement = this.el.nativeElement.querySelector(
-      'form .ng-invalid'
-    );
+    const firstInvalidControl: HTMLElement =
+      this.el.nativeElement.querySelector('form .ng-invalid');
 
     firstInvalidControl.focus(); // without smooth behavior
   }

@@ -1,7 +1,13 @@
-<div class="container">
-  <div class="card">
+<div class="container full-width">
+  <div class="card full-width" style="max-width: 900px">
     <div class="card__header">
-      <div class="card__header--title" text="text" translate="categories.headers.create">Create</div>
+      <div
+        class="card__header--title"
+        text="text"
+        translate="categories.headers.create"
+      >
+        Create
+      </div>
     </div>
     <div class="card__content">
       <form [formGroup]="form" class="form full-width">
@@ -9,9 +15,25 @@
           cols="12"
           (keyup.enter)="submit()"
           class="form__item"
-          [label]="t('fields.name')"
-          [control]="form.controls.name"
-          [error]="errors.name"
+          [label]="t('fields.name_ro')"
+          [control]="form.controls.name_ro"
+          [error]="errors.name_ro"
+        ></form-input>
+        <form-input
+          cols="12"
+          (keyup.enter)="submit()"
+          class="form__item"
+          [label]="t('fields.name_en')"
+          [control]="form.controls.name_en"
+          [error]="errors.name_en"
+        ></form-input>
+        <form-input
+          cols="12"
+          (keyup.enter)="submit()"
+          class="form__item"
+          [label]="t('fields.name_ru')"
+          [control]="form.controls.name_ru"
+          [error]="errors.name_ru"
         ></form-input>
         <app-file-uploader
           (keyup.enter)="submit()"

@@ -14,7 +14,7 @@ export class IndexComponent implements OnInit {
   headers = [] as Array<any>;
   loading = false;
   showFilters = false;
-  module = 'categories'
+  module = 'categories';
 
   filter: FormGroup;
 

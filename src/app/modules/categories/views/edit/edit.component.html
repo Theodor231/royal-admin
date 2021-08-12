@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="card">
+  <div class="card full-width" style="max-width: 900px">
     <div class="card__header">
       <div
         class="card__header--title ml-10"
@@ -12,12 +12,28 @@
     <div class="card__content mt-10">
       <form [formGroup]="form" class="form">
         <form-input
-          cols="6"
+          cols="12"
           (keyup.enter)="submit()"
           class="form__item"
-          [label]="t('fields.name')"
-          [control]="form.controls.name"
-          [error]="errors.name"
+          [label]="t('fields.name_ro')"
+          [control]="form.controls.name_ro"
+          [error]="errors.name_ro"
+        ></form-input>
+        <form-input
+          cols="12"
+          (keyup.enter)="submit()"
+          class="form__item"
+          [label]="t('fields.name_en')"
+          [control]="form.controls.name_en"
+          [error]="errors.name_en"
+        ></form-input>
+        <form-input
+          cols="12"
+          (keyup.enter)="submit()"
+          class="form__item"
+          [label]="t('fields.name_ru')"
+          [control]="form.controls.name_ru"
+          [error]="errors.name_ru"
         ></form-input>
         <app-file-uploader
           (keyup.enter)="submit()"
@@ -27,6 +43,13 @@
           [control]="form.controls.image"
           [error]="errors.image"
         ></app-file-uploader>
+        <app-checkbox
+          cols="12"
+          class="form__item"
+          [label]="t('fields.is_active')"
+          [control]="form.controls.is_active"
+          [error]="errors.is_active"
+        ></app-checkbox>
       </form>
     </div>
     <div class="card__footer">

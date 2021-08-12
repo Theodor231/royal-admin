@@ -76,12 +76,12 @@ export class EditPermissionsComponent implements OnInit {
   }
 
   selectFields(field: string, index): void {
-    if (this.expandedItem.items[index].fields.some((item: string)=> item === field)) {
-      this.expandedItem.items[index].fields.splice(index, 1)
+    if (this.expandedItem.items[index].fields.some((item: string) => item === field)) {
+      this.expandedItem.items[index].fields.splice(index, 1);
       return;
     } else {
 
     }
-    this.expandedItem.items[index].fields.push(field)
+    this.expandedItem.items[index].fields.push(field);
   }
 }

@@ -7,10 +7,18 @@
     "title": "Goods",
     "fields": {
       "title": "Goods",
-      "name": "Name",
+      "name_ro": "Name RO",
+      "name_en": "Name EN",
+      "name_ru": "Name RU",
       "price": "Price",
       "discount": "Discount",
-      "image": "Image"
+      "image": "Image",
+      "description_ro": "Description RO",
+      "description_en": "Description EN",
+      "description_ru": "Description RU",
+      "height": "Height",
+      "width": "Width",
+      "length": "Length"
     },
     "buttons": {
       "create": "Add new Goods",
