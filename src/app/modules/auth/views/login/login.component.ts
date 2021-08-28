@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
         'admin@gmail.com',
         [Validators.required, Validators.pattern(this.emailRegx)],
       ],
-      password: ['12345678', Validators.required],
+      password: ['11111111', Validators.required],
     });
   }
 

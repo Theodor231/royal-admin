@@ -11,8 +11,8 @@ export class AuthService {
 
   resourceUrl = `${environment.api}/auth`;
 
-  login(params: any = {}): Observable<any> {
-    return this.http.get(`${this.resourceUrl}/login`, { params });
+  login(body: any = {}): Observable<any> {
+    return this.http.post(`${this.resourceUrl}/login`,  body );
   }
 
   register(params: any = {}): Observable<any> {
