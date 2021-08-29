@@ -68,10 +68,24 @@
       <thead>
         <tr>
           <td
+            (click)="setSort(header.value)"
+            class="cursor-pointer"
             *ngFor="let header of headers"
             [style.width]="header.width + 'em' || 'auto'"
           >
-            {{ header.text }}
+            <div class="d-flex align-center justify-center">
+              <span>
+                {{ header.text }}
+              </span>
+              <span *ngIf="params.order" size="14">
+                <icon *ngIf="params.order[header.value] === -1">
+                  arrow_upward
+                </icon>
+                <icon *ngIf="params.order[header.value] === 1">
+                  arrow_downward
+                </icon>
+              </span>
+            </div>
           </td>
         </tr>
       </thead>
