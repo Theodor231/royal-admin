@@ -1,72 +1,58 @@
-<div class="container">
-  <div class="card">
-    <div class="card__header">
-      <div
-        class="card__header--title"
-        text="text"
-        translate="roles.headers.create"
-      >
-        Create
-      </div>
-    </div>
-    <div class="card__content">
-      <form [formGroup]="form" class="form">
-        <form-input
-          cols="12"
-          (keyup.enter)="submit()"
-          class="form__item"
-          [label]="t('roles.fields.name')"
-          [control]="form.controls.name"
-          [error]="errors.name"
-        ></form-input>
-        <form-input
-          (keyup.enter)="submit()"
-          cols="12"
-          class="form__item"
-          [label]="t('roles.fields.alias')"
-          [control]="form.controls.alias"
-          [error]="errors.alias"
-        ></form-input>
-        <form-input
-          (keyup.enter)="submit()"
-          cols="12"
-          class="form__item"
-          label="Guard"
-          [control]="form.controls.guard"
-          [error]="errors.guard"
-        ></form-input>
-        <form-input
-          (keyup.enter)="submit()"
-          cols="12"
-          [icon]="'flaticon-locked-padlock-outline'"
-          class="form__item"
-          [type]="'password'"
-          [label]="'Password'"
-          [control]="form.controls.password"
-          [error]="errors.password"
-        ></form-input>
+<div style="padding: 40px 100px 40px">
+  <mat-card>
+    <mat-card-title>Create</mat-card-title>
+    <mat-card-content class="mt-20">
+      <form [formGroup]="form">
+        <mat-grid-list cols="12" rowHeight="100px">
+          <mat-grid-tile colspan="4">
+            <mat-form-field appearance="outline" class="full-width mx-5">
+              <mat-label translate="roles.fields.name"> name</mat-label>
+              <input
+                matInput
+                placeholder="Placeholder"
+                [formControl]="form.controls.name"
+              />
+              <mat-error *ngIf="getErrorMessage('name')">
+                {{ getErrorMessage("name") }}
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile colspan="4">
+            <mat-form-field appearance="outline" class="full-width mx-5">
+              <mat-label translate="roles.fields.alias"> alias</mat-label>
+              <input
+                matInput
+                placeholder="Placeholder"
+                [formControl]="form.controls.alias"
+              />
+              <mat-error *ngIf="getErrorMessage('alias')">
+                {{ getErrorMessage("alias") | json }}
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile colspan="4">
+            <mat-form-field appearance="outline" class="full-width mx-5">
+              <mat-label translate="Guard"> guard</mat-label>
+              <input
+                matInput
+                placeholder="Placeholder"
+                [formControl]="form.controls.guard"
+              />
+              <mat-error *ngIf="getErrorMessage('guard')">
+                {{ getErrorMessage("guard") | json }}
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+        </mat-grid-list>
       </form>
-    </div>
-    <div class="card__footer">
-      <div>
-        <button
-          class="card__footer--btn card__footer--cancel"
-          routerLink="../"
-          translate="global_buttons.cancel"
-          text="text"
-        >
-          cancel
-        </button>
-        <button
-          [disabled]="loading"
-          theme="primary"
-          class="card__footer--btn"
-          (click)="submit()"
-          translate="global_buttons.save"
-        >
-          submit
+    </mat-card-content>
+    <mat-card-actions>
+      <div class="d-flex align-center justify-end full-width pb-20">
+        <button mat-button routerLink="../">cancel</button>
+        <button mat-raised-button color="primary" (click)="submit()">
+          save
         </button>
       </div>
-    </div>
-  </div>
+    </mat-card-actions>
+  </mat-card>
 </div>

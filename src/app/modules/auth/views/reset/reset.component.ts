@@ -1,19 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { MustMatch } from 'src/app/_helpers/must-much.validator';
-import { AlertService } from 'src/app/_services/helpers/alert.service';
-import { AuthService } from 'src/app/_services/api/auth.service';
-import { LoaderService } from 'src/app/_services/helpers/loader.service';
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import { MustMatch } from "src/app/_helpers/must-much.validator";
+import { AlertService } from "src/app/_services/helpers/alert.service";
+import { AuthService } from "src/app/api/modules/auth.service";
+import { LoaderService } from "src/app/_services/helpers/loader.service";
 
 @Component({
-  selector: 'app-reset',
-  templateUrl: './reset.component.html',
-  styleUrls: ['./reset.component.scss'],
+  selector: "app-reset",
+  templateUrl: "./reset.component.html",
+  styleUrls: ["./reset.component.scss"],
 })
 export class ResetComponent implements OnInit {
   form: FormGroup;
-  token = '';
+  token = "";
 
   constructor(
     private formBuilder: FormBuilder,
@@ -24,7 +24,7 @@ export class ResetComponent implements OnInit {
     private alertService: AlertService
   ) {
     this.route.queryParams.subscribe((param: any) => {
-      this.check_reset_token(param.token);
+      this.checkResetToken(param.token);
     });
   }
 
@@ -45,11 +45,11 @@ export class ResetComponent implements OnInit {
           ],
         ],
       },
-      MustMatch('password', 'repeat_password')
+      MustMatch("password", "repeat_password")
     );
   }
 
-  submit(event: any): void {
+  async submit(event: any): Promise<void> {
     event.preventDefault();
     if (!this.form.valid) {
       this.form.markAllAsTouched();
@@ -63,32 +63,23 @@ export class ResetComponent implements OnInit {
       repeat_password: this.form.value.repeat_password,
       token: this.token,
     };
-    this.authService.resetPassword(params).subscribe(
-      (response: any) => {
-        this.router.navigate(['/']);
-      },
-      (error: any) => {
-        this.alertService.showError(error.error.message);
-        this.loaderService.hideLocalLoader();
-      },
-      () => {
-        this.loaderService.hideLocalLoader();
-      }
-    );
+
+    try {
+      await this.authService.resetPassword(params);
+      await this.router.navigate(["/"]);
+    } catch (e) {
+      this.alertService.showError(e.error.message);
+    }
+
+    this.loaderService.hideLocalLoader();
   }
 
-  check_reset_token(token: string): void {
+  async checkResetToken(token: string): Promise<void> {
     this.loaderService.show();
-    this.authService.checkResetToken({ token }).subscribe(
-      () => {
-        this.token = token;
-      },
-      (error) => {
-        this.router.navigate(['/']);
-      },
-      () => {
-        this.loaderService.show();
-      }
-    );
+    try {
+      this.token = await this.authService.checkResetToken({ token });
+    } catch (e) {
+      await this.router.navigate(["/"]);
+    }
   }
 }

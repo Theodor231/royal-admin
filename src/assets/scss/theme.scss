@@ -66,6 +66,10 @@ button[color="error"] {
   color: var(--text);
 }
 
+*[text="light-gray"] {
+  color: var(--light-gray);
+}
+
 button[theme="primary"] {
   background-color: var(--primary);
   color: var(--light);

@@ -1,14 +1,14 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { BehaviorSubject } from "rxjs";
+import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class GeneralService {
   showGlobalPreloader = new BehaviorSubject(null);
-  moduleName = new BehaviorSubject('');
+  moduleName = new BehaviorSubject("");
   showSideBar = false as boolean;
   filter = {} as any;
   userEvent = new BehaviorSubject(null);
@@ -19,8 +19,8 @@ export class GeneralService {
     private route: ActivatedRoute
   ) {
     this.setModuleName();
-    if (localStorage.getItem('credentials')) {
-      const credentials = JSON.parse(localStorage.getItem('credentials'));
+    if (localStorage.getItem("credentials")) {
+      const credentials = JSON.parse(localStorage.getItem("credentials"));
       this.userEvent.next(credentials.user);
     }
     router.events.subscribe((event: any) => {
@@ -31,7 +31,7 @@ export class GeneralService {
   }
 
   setModuleName(): any {
-    const [, , module] = this.router.url.split('/');
+    const [, , module] = this.router.url.split("/");
     this.moduleName.next(module);
     return this;
   }

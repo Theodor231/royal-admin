@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { HelpersService } from 'src/app/_services/helpers.service';
-import { ApiService } from 'src/app/_services/api.service';
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+import { HelpersService } from "src/app/_services/helpers.service";
+import { ApiService } from "src/app/api/api.service";
 
 @Component({
-  selector: 'app-edit-permissions',
-  templateUrl: './edit-permissions.component.html',
-  styleUrls: ['./edit-permissions.component.scss'],
+  selector: "app-edit-permissions",
+  templateUrl: "./edit-permissions.component.html",
+  styleUrls: ["./edit-permissions.component.scss"],
 })
 export class EditPermissionsComponent implements OnInit {
   permissions = [] as Array<any>;
@@ -26,27 +26,19 @@ export class EditPermissionsComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.loadData();
+  async ngOnInit(): Promise<void> {
+    await this.loadData();
   }
 
-  loadData(): void {
+  async loadData(): Promise<void> {
     this.loading = true;
+    try {
+      this.permissions = await this.api.roles().getPermissions(this.alias);
+    } catch (e) {
+      this.helpers.alert().showError(e.error.message);
+    }
 
-    this.api
-      .roles()
-      .getPermissions(this.alias)
-      .subscribe(
-        (data: any) => {
-          this.permissions = data;
-        },
-        (e) => {
-          this.helpers.alert().showError(e.error.message);
-        },
-        () => {
-          this.loading = false;
-        }
-      );
+    this.loading = false;
   }
 
   translate(locale): string {
@@ -61,26 +53,24 @@ export class EditPermissionsComponent implements OnInit {
     this.expandedItem = item;
   }
 
-  submit(): void {
-    this.api
-      .roles()
-      .updatePermissions(this.permissions)
-      .subscribe(
-        (response: any) => {
-          this.helpers.alert().showSuccess('Successful updated!');
-        },
-        (e: any) => {
-          this.helpers.alert().showSuccess(e.message);
-        }
-      );
+  async submit(): Promise<void> {
+    try {
+      await this.api.roles().updatePermissions(this.permissions);
+      this.helpers.alert().showSuccess("Successful updated!");
+    } catch (e) {
+      this.helpers.alert().showSuccess(e.message);
+    }
   }
 
   selectFields(field: string, index): void {
-    if (this.expandedItem.items[index].fields.some((item: string) => item === field)) {
+    if (
+      this.expandedItem.items[index].fields.some(
+        (item: string) => item === field
+      )
+    ) {
       this.expandedItem.items[index].fields.splice(index, 1);
       return;
     } else {
-
     }
     this.expandedItem.items[index].fields.push(field);
   }

@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { IndexComponent } from './index.component';
+import { IndexComponent } from "./index.component";
 
-describe('IndexComponent', () => {
+describe("IndexComponent", () => {
   let component: IndexComponent;
   let fixture: ComponentFixture<IndexComponent>;
 
@@ -18,7 +18,7 @@ describe('IndexComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

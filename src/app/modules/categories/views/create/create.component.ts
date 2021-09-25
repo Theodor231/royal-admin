@@ -1,13 +1,13 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { ApiService } from 'src/app/_services/api.service';
-import { HelpersService } from 'src/app/_services/helpers.service';
+import { Component, ElementRef, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
+import { ApiService } from "src/app/api/api.service";
+import { HelpersService } from "src/app/_services/helpers.service";
 
 @Component({
-  selector: 'app-create',
-  templateUrl: './create.component.html',
-  styleUrls: ['./create.component.scss'],
+  selector: "app-create",
+  templateUrl: "./create.component.html",
+  styleUrls: ["./create.component.scss"],
 })
 export class CreateComponent implements OnInit {
   form: FormGroup;
@@ -16,7 +16,7 @@ export class CreateComponent implements OnInit {
   loading = false as boolean;
   errors = {} as any;
   roles = [] as Array<any>;
-  module = 'categories';
+  module = "categories";
   services = [];
 
   constructor(
@@ -46,11 +46,11 @@ export class CreateComponent implements OnInit {
       .create(this.helpers.toFormData(this.form.value))
       .subscribe(
         () => {
-          this.helpers.alert().showSuccess('Successful created');
+          this.helpers.alert().showSuccess("Successful created");
           this.router.navigateByUrl(`/ro/${this.module}`);
         },
         (e) => {
-          if (e.error.hasOwnProperty('errors')) {
+          if (e.error.hasOwnProperty("errors")) {
             this.errors = e.error.errors;
             setTimeout(() => {
               this.errors = {};
@@ -67,7 +67,7 @@ export class CreateComponent implements OnInit {
 
   changeStatus(): void {
     this.form.markAllAsTouched();
-    document.getElementById('2').scrollIntoView();
+    document.getElementById("2").scrollIntoView();
     setTimeout(() => {
       this.scrollToFirstInvalidControl();
     }, 2000);
@@ -75,7 +75,7 @@ export class CreateComponent implements OnInit {
 
   private scrollToFirstInvalidControl(): void {
     const firstInvalidControl: HTMLElement =
-      this.el.nativeElement.querySelector('form .ng-invalid');
+      this.el.nativeElement.querySelector("form .ng-invalid");
 
     firstInvalidControl.focus(); // without smooth behavior
   }

@@ -1,21 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { HelpersService } from 'src/app/_services/helpers.service';
-import { ApiService } from 'src/app/_services/api.service';
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import { HelpersService } from "src/app/_services/helpers.service";
+import { ApiService } from "src/app/api/api.service";
 
 @Component({
-  selector: 'app-edit',
-  templateUrl: './edit.component.html',
-  styleUrls: ['./edit.component.scss'],
+  selector: "app-edit",
+  templateUrl: "./edit.component.html",
+  styleUrls: ["./edit.component.scss"],
 })
 export class EditComponent implements OnInit {
   form: FormGroup;
   loading = false as boolean;
   errors = {} as any;
   id: number;
-  credentials = JSON.parse(localStorage.getItem('credentials')) || null;
-  module = 'categories';
+  credentials = JSON.parse(localStorage.getItem("credentials")) || null;
+  module = "categories";
 
   constructor(
     private formBuilder: FormBuilder,
@@ -46,42 +46,41 @@ export class EditComponent implements OnInit {
     }
 
     this.loading = true;
-    this.api[this.module]()
-      .edit(this.id, this.helpers.toFormData(this.form.value))
-      .subscribe(
-        () => {
-          this.helpers.alert().showSuccess('Successful edited.');
-          this.router.navigate([`ro/${this.module}`]);
-        },
-        (e: any) => {
-          if (e.hasOwnProperty('error')) {
-            this.errors = e.error;
-            setTimeout(() => {
-              this.errors = {};
-            }, 5000);
-          }
-          this.helpers.alert().showError(e.error.message);
-        }
+
+    try {
+      this.api[this.module]().edit(
+        this.id,
+        this.helpers.toFormData(this.form.value)
       );
+      this.helpers.alert().showSuccess("Successful edited.");
+      await this.router.navigate([`ro/${this.module}`]);
+    } catch (e) {
+      if (e.hasOwnProperty("error")) {
+        this.errors = e.error;
+        setTimeout(() => {
+          this.errors = {};
+        }, 5000);
+      }
+      this.helpers.alert().showError(e.error.message);
+    }
+    this.loading = false;
   }
 
-  getItem(): void {
+  async getItem(): Promise<void> {
     this.loading = true;
-    this.api[this.module]()
-      .getForEdit(this.id)
-      .subscribe(
-        (response: any) => {
-          const formData = this.helpers.setForm(response, this.form);
-          this.form.setValue({ ...formData });
-          this.loading = false;
-        },
-        (e) => {
-          if (e.error.hasOwnProperty('errors')) {
-            this.errors = e.errors;
-          }
-          this.helpers.alert().showError(e.error.message);
-        }
-      );
+
+    try {
+      const response = await this.api.categories().getForEdit(this.id);
+      const formData = this.helpers.setForm(response, this.form);
+      this.form.setValue({ ...formData });
+    } catch (e) {
+      if (e.error.hasOwnProperty("errors")) {
+        this.errors = e.errors;
+      }
+      this.helpers.alert().showError(e.error.message);
+    }
+
+    this.loading = false;
   }
 
   t(locale: string): string {

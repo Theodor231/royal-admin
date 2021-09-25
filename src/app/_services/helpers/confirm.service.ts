@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class ConfirmService {
   confirm: any = {
-    title: 'Deletion!',
-    message: 'Are you sure the confirm this actions?',
+    title: "Deletion!",
+    message: "Are you sure the confirm this actions?",
     accept: () => {},
     decline: () => this.decline,
   };

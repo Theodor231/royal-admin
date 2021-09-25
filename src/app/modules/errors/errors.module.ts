@@ -1,20 +1,20 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Error404Component } from './error404/error404.component';
-import { Error500Component } from './error500/error500.component';
-import { RouterModule, Routes } from '@angular/router';
-import { Error403Component } from './error403/error403.component';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { Error404Component } from "./error404/error404.component";
+import { Error500Component } from "./error500/error500.component";
+import { RouterModule, Routes } from "@angular/router";
+import { Error403Component } from "./error403/error403.component";
 const routes: Routes = [
   {
-    path: '404',
+    path: "404",
     component: Error404Component,
   },
   {
-    path: '500',
+    path: "500",
     component: Error500Component,
   },
   {
-    path: '403',
+    path: "403",
     component: Error403Component,
   },
 ];

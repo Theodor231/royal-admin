@@ -1,42 +1,43 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
 
-import { IndexComponent } from './views/index/index.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ComponentsModule } from '../../components/components.module';
-import { RouterModule, Routes } from '@angular/router';
-import { DialogsModule } from '../../dialogs/dialogs.module';
-import { DirectivesModule } from 'src/app/directives/directives.module';
-import { CreateComponent } from './views/create/create.component';
-import { EditComponent } from './views/edit/edit.component';
-import { EditPermissionsComponent } from './views/edit-permissions/edit-permissions.component';
+import { IndexComponent } from "./views/index/index.component";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { ComponentsModule } from "../../components/components.module";
+import { RouterModule, Routes } from "@angular/router";
+import { DialogsModule } from "../../dialogs/dialogs.module";
+import { DirectivesModule } from "src/app/directives/directives.module";
+import { CreateComponent } from "./views/create/create.component";
+import { EditComponent } from "./views/edit/edit.component";
+import { EditPermissionsComponent } from "./views/edit-permissions/edit-permissions.component";
+import { MaterialModule } from "../../plugins/material/material.module";
 
 const routes: Routes = [
   {
-    path: 'create',
+    path: "create",
     component: CreateComponent,
   },
   {
-    path: 'edit/:id',
+    path: "edit/:id",
     component: EditComponent,
   },
   {
-    path: 'edit-permissions/:alias',
+    path: "edit-permissions/:alias",
     component: EditPermissionsComponent,
   },
   {
-    path: 'page/:page',
+    path: "page/:page",
     component: IndexComponent,
   },
   {
-    path: '',
-    redirectTo: 'page/1',
-    pathMatch: 'full',
+    path: "",
+    redirectTo: "page/1",
+    pathMatch: "full",
   },
   {
-    path: ':page',
-    redirectTo: 'page/1',
-    pathMatch: 'full',
+    path: ":page",
+    redirectTo: "page/1",
+    pathMatch: "full",
   },
 ];
 
@@ -55,6 +56,7 @@ const routes: Routes = [
     DialogsModule,
     RouterModule.forChild(routes),
     DirectivesModule,
+    MaterialModule,
   ],
 })
 export class RolesModule {}

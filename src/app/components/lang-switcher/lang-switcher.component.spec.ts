@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { LangSwitcherComponent } from './lang-switcher.component';
+import { LangSwitcherComponent } from "./lang-switcher.component";
 
-describe('LangSwitcherComponent', () => {
+describe("LangSwitcherComponent", () => {
   let component: LangSwitcherComponent;
   let fixture: ComponentFixture<LangSwitcherComponent>;
 
@@ -18,7 +18,7 @@ describe('LangSwitcherComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

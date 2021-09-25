@@ -1,58 +1,58 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { MainComponent } from './main.component';
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
+import { MainComponent } from "./main.component";
 
 const routes: Routes = [
   {
-    path: ':lang',
+    path: ":lang",
     component: MainComponent,
     children: [
       {
-        path: 'users',
+        path: "users",
         loadChildren: () =>
-          import('src/app/modules/users/users.module').then(
+          import("src/app/modules/users/users.module").then(
             (m) => m.UsersModule
           ),
       },
       {
-        path: 'roles',
+        path: "roles",
         loadChildren: () =>
-          import('src/app/modules/roles/roles.module').then(
+          import("src/app/modules/roles/roles.module").then(
             (m) => m.RolesModule
           ),
       },
       {
-        path: 'categories',
+        path: "categories",
         loadChildren: () =>
-          import('src/app/modules/categories/categories.module').then(
+          import("src/app/modules/categories/categories.module").then(
             (m) => m.CategoriesModule
           ),
       },
       {
-        path: 'goods',
+        path: "goods",
         loadChildren: () =>
-          import('src/app/modules/goods/goods.module').then(
+          import("src/app/modules/goods/goods.module").then(
             (m) => m.GoodsModule
           ),
       },
       {
-        path: 'error',
+        path: "error",
         loadChildren: () =>
-          import('src/app/modules/errors/errors.module').then(
+          import("src/app/modules/errors/errors.module").then(
             (m) => m.ErrorsModule
           ),
       },
     ],
   },
   {
-    path: '',
-    redirectTo: 'ro/users',
-    pathMatch: 'full',
+    path: "",
+    redirectTo: "ro/users",
+    pathMatch: "full",
   },
   {
-    path: ':lang',
-    redirectTo: ':lang/users',
-    pathMatch: 'full',
+    path: ":lang",
+    redirectTo: ":lang/users",
+    pathMatch: "full",
   },
 ];
 

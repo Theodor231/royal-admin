@@ -1,120 +1,74 @@
-<div class="content">
-  <div class="card">
-    <div class="actions my-10">
-      <button
-        routerLink="../../create"
-        class="btn__create icon-button text-nowrap pa-5"
-      >
-        <span class="flaticon-add-plus-button"></span>
-        <icon>add</icon>
-        <span translate="goods.buttons.create" text="text"> Add new data </span>
-      </button>
-      <div class="buttons justify-end align-end">
-        <button size="24" (click)="loadData()" [title]="t('buttons.load_data')">
-          <icon size="16">refresh</icon>
-        </button>
-        <button
-          size="24"
-          (click)="toggleFilters()"
-          [title]="t('buttons.open_filter')"
-        >
-          <icon size="16">filter_alt</icon>
-        </button>
-      </div>
-    </div>
-    <div class="filter transition-all" *ngIf="showFilters">
-      <div class="filter__content">
-        <form-input
-          cols="12"
-          sm="4"
-          [control]="filter.controls.name_ro"
-          [label]="t('fields.name_ro')"
-          (keyup.enter)="loadData()"
-        ></form-input>
-        <form-input
-          cols="12"
-          sm="4"
-          [control]="filter.controls.name_en"
-          [label]="t('fields.name_en')"
-          (keyup.enter)="loadData()"
-        ></form-input>
-        <form-input
-          cols="12"
-          sm="4"
-          [control]="filter.controls.name_ru"
-          [label]="t('fields.name_ru')"
-          (keyup.enter)="loadData()"
-        ></form-input>
-      </div>
-      <div class="filter__footer">
-        <div class="filter__footer--buttons">
-          <button class="btn" (click)="resetFilter()">
-            <span translate="global_buttons.reset" text="text">reset</span>
-          </button>
-          <button class="btn" theme="primary" (click)="loadData()">
-            <span translate="global_buttons.apply">apply</span>
-          </button>
-        </div>
-      </div>
-    </div>
-    <app-table
-      [loading]="loading"
-      [headers]="headers"
-      [items]="items"
-      [pagination]="params"
-      (remove)="removeItem($event)"
-      (changePage)="changePage($event)"
-    >
-      <thead>
-        <tr>
-          <td
-            (click)="setSort(header.value)"
-            class="cursor-pointer"
-            *ngFor="let header of headers"
-            [style.width]="header.width + 'em' || 'auto'"
-          >
-            <div class="d-flex align-center justify-center">
-              <span>
-                {{ header.text }}
-              </span>
-              <span *ngIf="params.order" size="14">
-                <icon *ngIf="params.order[header.value] === -1">
-                  arrow_upward
-                </icon>
-                <icon *ngIf="params.order[header.value] === 1">
-                  arrow_downward
-                </icon>
-              </span>
-            </div>
-          </td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of items">
-          <td *ngFor="let header of headers" [ngSwitch]="header.value">
-            <ng-container *ngSwitchCase="'image'">
-              <button (click)="helpers.download(item[header.value])">
-                <icon size="24">plagiarism</icon>
-              </button>
-            </ng-container>
-            <ng-container *ngSwitchCase="'actions'">
-              <div class="buttons">
-                <button [routerLink]="['../../edit', item.id]">
-                  <icon size="16">edit</icon>
-                </button>
-                <button (click)="openConfirm(item.id)">
-                  <icon size="16" class="buttons__delete">delete</icon>
-                </button>
-              </div>
-            </ng-container>
-            <ng-container *ngSwitchDefault>
-              <span>
-                {{ item[header.value] }}
-              </span>
-            </ng-container>
-          </td>
-        </tr>
-      </tbody>
-    </app-table>
-  </div>
-</div>
+<app-data-table
+  [items]="items"
+  [headers]="headers"
+  [columnsToDisplay]="columnsToDisplay"
+  [loading]="loading"
+  [showFilters]="showFilters"
+  [params]="params"
+  [module]="module"
+  (confirm)="openConfirm($event)"
+  (page)="changePage($event)"
+  (sort)="sortData($event)"
+  (update)="loadData()"
+  (filter)="toggleFilters()"
+>
+  <form [formGroup]="filter">
+    <mat-grid-list cols="12" rowHeight="100px">
+      <mat-grid-tile colspan="4">
+        <mat-form-field appearance="outline" class="full-width mx-5">
+          <mat-label [translate]="'goods.fields.name_ro'"> name_ro </mat-label>
+          <input
+                  (keyup.enter)="loadData()"
+            matInput
+            placeholder="Placeholder"
+            [formControl]="filter.controls.name_ro"
+          />
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="4">
+        <mat-form-field appearance="outline" class="full-width mx-5">
+          <mat-label [translate]="'goods.fields.name_en'"> name_en </mat-label>
+          <input
+                  (keyup.enter)="loadData()"
+            matInput
+            placeholder="Placeholder"
+            [formControl]="filter.controls.name_en"
+          />
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="4">
+        <mat-form-field appearance="outline" class="full-width mx-5">
+          <mat-label [translate]="'goods.fields.name_ru'"> name_ru </mat-label>
+          <input
+                  (keyup.enter)="loadData()"
+            matInput
+            placeholder="Placeholder"
+            [formControl]="filter.controls.name_ru"
+          />
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="4">
+        <mat-form-field appearance="outline" class="full-width mx-5">
+          <mat-label [translate]="'goods.fields.price'"> price </mat-label>
+          <input
+                  (keyup.enter)="loadData()"
+            matInput
+            placeholder="Placeholder"
+            [formControl]="filter.controls.price"
+          />
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="4">
+        <mat-form-field appearance="outline" class="full-width mx-5">
+          <mat-label [translate]="'goods.fields.discount'"> discount </mat-label>
+          <input
+                  (keyup.enter)="loadData()"
+            matInput
+            placeholder="Placeholder"
+            [formControl]="filter.controls.discount"
+          />
+        </mat-form-field>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </form>
+</app-data-table>

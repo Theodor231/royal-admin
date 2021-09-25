@@ -1,0 +1,108 @@
+<mat-card style="margin: 50px">
+  <div class="mt-10" style="width: 100%">
+    <div
+      style="
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+      "
+    >
+      <button
+        mat-stroked-button
+        text="primary"
+        [routerLink]="[
+          '/',
+          helpers.localization().activeLanguage,
+          module,
+          'create'
+        ]"
+      >
+        <mat-icon>add</mat-icon>
+        <mat-label class="ml-5">create {{ module }}</mat-label>
+      </button>
+      <div>
+        <button mat-icon-button (click)="loadData()">
+          <mat-icon>refresh</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          (click)="toggleFilter()"
+          style="margin-right: 10px"
+        >
+          <mat-icon>filter_alt</mat-icon>
+        </button>
+      </div>
+    </div>
+    <div class="d-flex flex-column" *ngIf="showFilters">
+      <mat-card-title class="mt-10">Filter</mat-card-title>
+      <ng-content></ng-content>
+      <mat-card-actions>
+        <div class="d-flex align-center justify-end full-width">
+          <button mat-flat-button>cancel</button>
+          <button mat-raised-button color="primary" (click)="loadData()">Apply</button>
+        </div>
+      </mat-card-actions>
+    </div>
+    <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+  </div>
+  <mat-card-content>
+    <table
+      mat-table
+      [dataSource]="items"
+      matSort
+      style="width: 100%"
+      (matSortChange)="sortData($event)"
+    >
+      <ng-container
+        [matColumnDef]="header.value"
+        *ngFor="let header of headers"
+        [ngSwitch]="header.value"
+      >
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          [mat-sort-header]="header.value"
+          [disabled]="!header.sortable"
+        >
+          {{ header.text }}
+        </th>
+        <ng-container *ngSwitchCase="'image'">
+          <td mat-cell *matCellDef="let row">
+            <a [href]="row[header.value].url" target="_blank"> View </a>
+          </td>
+        </ng-container>
+        <ng-container *ngSwitchCase="'actions'">
+          <td mat-cell *matCellDef="let row">
+            <div>
+              <button
+                mat-icon-button
+                color="error"
+                (click)="openConfirm(row.id)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+        <ng-container *ngSwitchDefault>
+          <td mat-cell *matCellDef="let row">
+            {{ row[header.value] }}
+          </td>
+        </ng-container>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+      <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter</td>
+      </tr>
+    </table>
+    <mat-paginator
+      [length]="params.total"
+      [pageSize]="params.per_page"
+      [pageSizeOptions]="pageSizeOptions"
+      (page)="changePage($event)"
+      aria-label="Select page of users"
+    ></mat-paginator>
+  </mat-card-content>
+</mat-card>

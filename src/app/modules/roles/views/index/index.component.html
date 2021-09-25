@@ -1,100 +1,49 @@
-<div class="content">
-  <div class="card">
-    <div class="actions my-10">
-      <button
-        routerLink="../../create"
-        class="btn__create icon-button text-nowrap pa-5"
-      >
-        <icon>add</icon>
-        <span translate="roles.buttons.create" text="text"> Add new data </span>
-      </button>
-      <div class="buttons justify-end align-end">
-        <button
-          size="24"
-          (click)="loadData()"
-          [title]="translate('roles.buttons.load_data')"
-        >
-          <icon size="16">refresh</icon>
-        </button>
-        <button
-          size="24"
-          (click)="toggleFilters()"
-          [title]="translate('roles.buttons.open_filter')"
-        >
-          <icon size="16">filter_alt</icon>
-        </button>
-      </div>
-    </div>
-    <div class="filter" *ngIf="showFilters">
-      <div class="filter__content">
-        <form-input
-          cols="12"
-          sm="4"
-          [control]="filter.controls.name"
-          [label]="translate('roles.fields.name')"
-          (keyup.enter)="loadData()"
-        ></form-input>
-        <form-input
-          sm="4"
-          cols="12"
-          (keyup.enter)="loadData()"
-          [label]="translate('roles.fields.alias')"
-          [control]="filter.controls.alias"
-        ></form-input>
-      </div>
-      <div class="filter__footer">
-        <div class="filter__footer--buttons">
-          <button class="btn" (click)="resetFilter()">
-            <span translate="global_buttons.reset" text="text">reset</span>
-          </button>
-          <button class="btn" theme="primary" (click)="loadData()">
-            <span translate="global_buttons.apply">apply</span>
-          </button>
-        </div>
-      </div>
-    </div>
-    <app-table
-      [loading]="loading"
-      [headers]="headers"
-      [items]="items"
-      [pagination]="params"
-      (remove)="removeItem($event)"
-      (changePage)="loadData()"
-    >
-      <thead>
-        <tr>
-          <td
-            *ngFor="let header of headers"
-            [style.width]="header.width + 'em' || 'auto'"
-          >
-            {{ header.text }}
-          </td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of items">
-          <td *ngFor="let header of headers">
-            <ng-container *ngIf="header.value !== 'actions'">
-              <span>
-                {{ item[header.value] }}
-              </span>
-            </ng-container>
-            <ng-container *ngIf="header.value === 'actions'">
-              <div class="buttons">
-                <button [routerLink]="['../../edit-permissions', item.alias]">
-                  <icon size="16">manage_accounts</icon>
-                </button>
-                <button [routerLink]="['../../edit', item.id]">
-                  <icon size="16">edit</icon>
-                </button>
-                <button (click)="openConfirm(item.id)">
-                  <icon size="16" class="buttons__delete">delete</icon>
-                </button>
-              </div>
-            </ng-container>
-          </td>
-        </tr>
-      </tbody>
-    </app-table>
-  </div>
-</div>
+<app-data-table
+  [module]="module"
+  [items]="items"
+  [headers]="headers"
+  [columnsToDisplay]="columnsToDisplay"
+  [loading]="loading"
+  [showFilters]="showFilters"
+  [params]="params"
+  (confirm)="openConfirm($event)"
+  (page)="changePage($event)"
+  (sort)="sortData($event)"
+  (update)="loadData()"
+  (filter)="toggleFilters()"
+>
+  <form [formGroup]="filter">
+    <mat-grid-list cols="12" rowHeight="100px">
+      <mat-grid-tile colspan="4">
+        <mat-form-field appearance="outline" class="full-width mx-5">
+          <mat-label translate="roles.fields.name"> name</mat-label>
+          <input
+            matInput
+            placeholder="Placeholder"
+            [formControl]="filter.controls.name"
+          />
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="4">
+        <mat-form-field appearance="outline" class="full-width mx-5">
+          <mat-label translate="roles.fields.alias"> alias</mat-label>
+          <input
+            matInput
+            placeholder="Placeholder"
+            [formControl]="filter.controls.alias"
+          />
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="4">
+        <mat-form-field appearance="outline" class="full-width mx-5">
+          <mat-label translate="Guard"> guard</mat-label>
+          <input
+            matInput
+            placeholder="Placeholder"
+            [formControl]="filter.controls.guard"
+          />
+        </mat-form-field>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </form>
+</app-data-table>

@@ -1,26 +1,27 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
 
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { AppInterceptor } from './app.interceptor';
-import { LoaderService } from './_services/helpers/loader.service';
-import { ComponentsModule } from './components/components.module';
-import { DirectivesModule } from './directives/directives.module';
-import {RouterModule, Routes} from '@angular/router';
+import { AppComponent } from "./app.component";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
+import { AppInterceptor } from "./app.interceptor";
+import { LoaderService } from "./_services/helpers/loader.service";
+import { ComponentsModule } from "./components/components.module";
+import { DirectivesModule } from "./directives/directives.module";
+import { RouterModule, Routes } from "@angular/router";
+import { MaterialModule } from "./plugins/material/material.module";
 
 const routes: Routes = [
   {
-    path: 'auth',
+    path: "auth",
     loadChildren: () =>
-        import('./layouts/auth/auth.module').then((m) => m.AuthModule),
+      import("./layouts/auth/auth.module").then((m) => m.AuthModule),
   },
   {
-    path: '',
+    path: "",
     loadChildren: () =>
-        import('./layouts/main/main.module').then((m) => m.MainModule),
+      import("./layouts/main/main.module").then((m) => m.MainModule),
   },
 ];
 
@@ -34,7 +35,8 @@ const routes: Routes = [
     HttpClientModule,
     ComponentsModule,
     DirectivesModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    MaterialModule,
   ],
   providers: [
     {
@@ -45,6 +47,5 @@ const routes: Routes = [
     LoaderService,
   ],
   bootstrap: [AppComponent],
-  exports: [],
 })
 export class AppModule {}

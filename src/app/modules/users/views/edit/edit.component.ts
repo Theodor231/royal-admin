@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { HelpersService } from 'src/app/_services/helpers.service';
-import { ApiService } from 'src/app/_services/api.service';
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import { HelpersService } from "src/app/_services/helpers.service";
+import { ApiService } from "src/app/api/api.service";
 
 @Component({
-  selector: 'app-edit',
-  templateUrl: './edit.component.html',
-  styleUrls: ['./edit.component.scss'],
+  selector: "app-edit",
+  templateUrl: "./edit.component.html",
+  styleUrls: ["./edit.component.scss"],
 })
 export class EditComponent implements OnInit {
   form: FormGroup;
@@ -15,7 +15,7 @@ export class EditComponent implements OnInit {
   errors = {} as any;
   roles = [] as Array<any>;
   id: number;
-  credentials = JSON.parse(localStorage.getItem('credentials')) || null;
+  credentials = JSON.parse(localStorage.getItem("credentials")) || null;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -25,19 +25,32 @@ export class EditComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit(): void {
+  async getItem(): Promise<void> {
+    this.loading = true;
+    try {
+      const response = await this.api.users().getForEdit(this.id);
+      const formData = this.helpers.setForm(response, this.form);
+      console.log();
+
+      this.form.setValue({ ...formData });
+    } catch (e) {
+      if (e.error.hasOwnProperty("errors")) {
+        this.errors = e.errors;
+      }
+      this.helpers.alert().showError(e.error.message);
+    }
+
+    this.loading = false;
+  }
+
+  async ngOnInit(): Promise<void> {
     this.form = this.formBuilder.group({
       email: [null, [Validators.required]],
       avatar: [null],
       name: [null, Validators.required],
       roleId: [null, Validators.required],
     });
-    this.api
-      .roles()
-      .getList()
-      .subscribe((data: Array<any>) => {
-        this.roles = data;
-      });
+    this.roles = await this.api.roles().getList();
     this.route.params.subscribe((param: any) => {
       if (param?.id) {
         this.id = param.id;
@@ -52,61 +65,35 @@ export class EditComponent implements OnInit {
     }
 
     this.loading = true;
-    this.api
-      .users()
-      .edit(this.id, this.helpers.toFormData(this.form.value))
-      .subscribe(
-        (user: any) => {
-          if (
-            this.credentials &&
-            this.credentials.user &&
-            this.credentials.user.id &&
-            user.avatar
-          ) {
-            if (this.credentials.user.id === user.id) {
-              this.credentials.user.avatar = user.avatar;
-              localStorage.setItem(
-                'credentials',
-                JSON.stringify(this.credentials)
-              );
-              this.helpers.g().userEvent.next(user);
-            }
-          }
-          this.helpers.alert().showSuccess('Successful edited.');
-          this.router.navigate(['ro/users']);
-        },
-        (e: any) => {
-          if (e.hasOwnProperty('error')) {
-            this.errors = e.error;
-            setTimeout(() => {
-              this.errors = {};
-            }, 5000);
-          }
-          this.helpers.alert().showError(e.error.message);
-        }
-      );
-  }
+    try {
+      const user = await this.api
+        .users()
+        .edit(this.id, this.helpers.toFormData(this.form.value));
 
-  getItem(): void {
+      if (
+        this.credentials &&
+        this.credentials.user &&
+        this.credentials.user.id &&
+        user.avatar
+      ) {
+        if (this.credentials.user.id === user.id) {
+          this.credentials.user.avatar = user.avatar;
+          localStorage.setItem("credentials", JSON.stringify(this.credentials));
+          this.helpers.g().userEvent.next(user);
+        }
+      }
+      this.helpers.alert().showSuccess("Successful edited.");
+      await this.router.navigate(["ro/users"]);
+    } catch (e) {
+      if (e.hasOwnProperty("error")) {
+        this.errors = e.error;
+        setTimeout(() => {
+          this.errors = {};
+        }, 5000);
+      }
+      this.helpers.alert().showError(e.error.message);
+    }
     this.loading = true;
-    this.api
-      .users()
-      .getForEdit(this.id)
-      .subscribe(
-        (response: any) => {
-          const formData = this.helpers.setForm(response, this.form);
-          console.log();
-
-          this.form.setValue({ ...formData });
-          this.loading = false;
-        },
-        (e) => {
-          if (e.error.hasOwnProperty('errors')) {
-            this.errors = e.errors;
-          }
-          this.helpers.alert().showError(e.error.message);
-        }
-      );
   }
 
   t(locale: string): string {

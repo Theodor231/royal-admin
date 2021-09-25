@@ -1,14 +1,13 @@
-import { Injectable } from '@angular/core';
-import { AuthService } from './api/auth.service';
-import { RolesService } from './api/roles.service';
-import { UsersService } from './api/users.service';
-import { ProductsService } from './api/products.service';
-import { CategoriesService } from './api/categories.service';
-import { NewsService } from './api/news.service';
-import { GoodsService } from './api/goods.service';
+import { Injectable } from "@angular/core";
+import { AuthService } from "./modules/auth.service";
+import { RolesService } from "./modules/roles.service";
+import { UsersService } from "./modules/users.service";
+import { ProductsService } from "./modules/products.service";
+import { CategoriesService } from "./modules/categories.service";
+import { GoodsService } from "./modules/goods.service";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class ApiService {
   constructor(
@@ -17,7 +16,6 @@ export class ApiService {
     private rolesService: RolesService,
     private productsService: ProductsService,
     private categoriesService: CategoriesService,
-    private newsService: NewsService,
     private goodsService: GoodsService
   ) {}
 
@@ -26,6 +24,5 @@ export class ApiService {
   roles = () => this.rolesService;
   products = () => this.productsService;
   categories = () => this.categoriesService;
-  news = () => this.newsService;
   goods = () => this.goodsService;
 }

@@ -1,11 +1,11 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
-import { EventEmitter } from '@angular/core';
-import { ConfirmService } from '../../_services/helpers/confirm.service';
+import { Component, Input, OnInit, Output } from "@angular/core";
+import { EventEmitter } from "@angular/core";
+import { ConfirmService } from "../../_services/helpers/confirm.service";
 
 @Component({
-  selector: 'app-table',
-  templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss'],
+  selector: "app-table",
+  templateUrl: "./table.component.html",
+  styleUrls: ["./table.component.scss"],
 })
 export class TableComponent implements OnInit {
   @Input() headers = [];

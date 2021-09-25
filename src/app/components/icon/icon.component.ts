@@ -1,10 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from "@angular/core";
 
 @Component({
-  selector: 'icon',
-  templateUrl: './icon.component.html',
-  styleUrls: ['./icon.component.scss'],
+  // tslint:disable-next-line:component-selector
+  selector: "icon",
+  templateUrl: "./icon.component.html",
+  styleUrls: ["./icon.component.scss"],
 })
 export class IconComponent {
-  @Input() icon = '';
+  @Input() icon = "";
 }

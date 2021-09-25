@@ -1,22 +1,22 @@
-import { EventEmitter, Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { EventEmitter, Injectable } from "@angular/core";
+import { Router } from "@angular/router";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class LocalizationService {
-  activeLanguage = 'en';
+  activeLanguage = "en";
   readonly LANGUAGES = {
-    ru: 'ru',
-    ro: 'ro',
-    en: 'en',
+    ru: "ru",
+    ro: "ro",
+    en: "en",
   } as any;
 
   messages = {} as any;
   onLanguageChange = new EventEmitter(true);
 
   constructor(private router: Router) {
-    const [_, currentLang] = router.url.split('/');
+    const [, currentLang] = router.url.split("/");
     this.activeLanguage = currentLang;
     this.loadLocaleMessages();
     this.onLanguageChange.subscribe((lang: any) => {
@@ -30,13 +30,13 @@ export class LocalizationService {
 
   loadLocaleMessages(): void {
     const locales = require.context(
-      '../../modules',
+      "../../modules",
       true,
       /[A-Za-z0-9-_,\s]+\.json$/i
     );
 
     const globalLocales = require.context(
-      '../../',
+      "../../",
       true,
       /[A-Za-z0-9-_,\s]+\.json$/i
     );
@@ -61,7 +61,7 @@ export class LocalizationService {
   }
 
   translate(translate): string {
-    const locales = translate.split('.');
+    const locales = translate.split(".");
     let dict = this.messages[this.activeLanguage];
 
     for (const key of locales) {

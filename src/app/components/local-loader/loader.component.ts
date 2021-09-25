@@ -1,7 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input } from "@angular/core";
 
 @Component({
-  selector: 'app-local-loader',
+  selector: "app-local-loader",
   template: ` <div *ngIf="loading" class="loader">
     <div class="loader__element"></div>
   </div>`,

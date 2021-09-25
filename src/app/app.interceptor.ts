@@ -1,15 +1,15 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
   HttpErrorResponse,
-} from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { environment } from '../environments/environment';
-import { Router } from '@angular/router';
-import { tap } from 'rxjs/operators';
+} from "@angular/common/http";
+import { Observable } from "rxjs";
+import { environment } from "../environments/environment";
+import { Router } from "@angular/router";
+import { tap } from "rxjs/operators";
 
 @Injectable()
 export class AppInterceptor implements HttpInterceptor {
@@ -22,13 +22,13 @@ export class AppInterceptor implements HttpInterceptor {
     const headers: any = {};
     let url = req.url;
 
-    const [, language] = this.router.url.split('/');
+    const [, language] = this.router.url.split("/");
 
-    headers['x-localization'] = language || 'en';
+    headers["x-localization"] = language || "en";
     headers.Authorization =
-      JSON.parse(localStorage.getItem('credentials'))?.token || '';
+      JSON.parse(localStorage.getItem("credentials"))?.token || "";
 
-    if (!req.url.startsWith('http')) {
+    if (!req.url.startsWith("http")) {
       url = environment.api + req.url;
     }
 
@@ -38,10 +38,10 @@ export class AppInterceptor implements HttpInterceptor {
         (err: any) => {
           if (err instanceof HttpErrorResponse) {
             if (err.status !== 401) {
-              this.router.navigate(['ro', 'error', err.status]);
+              this.router.navigate(["ro", "error", err.status]);
               return;
             }
-            this.router.navigate(['auth', 'login']);
+            this.router.navigate(["auth", "login"]);
           }
         }
       )

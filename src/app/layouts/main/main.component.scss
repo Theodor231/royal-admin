@@ -12,3 +12,9 @@
     padding-left: 60px;
   }
 }
+
+.active {
+  * {
+    color: var(--light) !important;
+  }
+}

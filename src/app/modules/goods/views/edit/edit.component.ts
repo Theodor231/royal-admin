@@ -1,21 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { HelpersService } from 'src/app/_services/helpers.service';
-import { ApiService } from 'src/app/_services/api.service';
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import { HelpersService } from "src/app/_services/helpers.service";
+import { ApiService } from "src/app/api/api.service";
 
 @Component({
-  selector: 'app-edit',
-  templateUrl: './edit.component.html',
-  styleUrls: ['./edit.component.scss'],
+  selector: "app-edit",
+  templateUrl: "./edit.component.html",
+  styleUrls: ["./edit.component.scss"],
 })
 export class EditComponent implements OnInit {
   form: FormGroup;
   loading = false as boolean;
   errors = {} as any;
   id: number;
-  credentials = JSON.parse(localStorage.getItem('credentials')) || null;
-  module = 'goods';
+  credentials = JSON.parse(localStorage.getItem("credentials")) || null;
+  module = "goods";
 
   categories = [] as Array<any>;
 
@@ -108,11 +108,11 @@ export class EditComponent implements OnInit {
       .edit(this.id, this.helpers.toFormData(this.form.value))
       .subscribe(
         () => {
-          this.helpers.alert().showSuccess('Successful edited.');
+          this.helpers.alert().showSuccess("Successful edited.");
           this.router.navigate([`ro/${this.module}`]);
         },
         (e: any) => {
-          if (e.hasOwnProperty('error')) {
+          if (e.hasOwnProperty("error")) {
             this.errors = e.error;
             setTimeout(() => {
               this.errors = {};
@@ -134,7 +134,7 @@ export class EditComponent implements OnInit {
           this.loading = false;
         },
         (e) => {
-          if (e.error.hasOwnProperty('errors')) {
+          if (e.error.hasOwnProperty("errors")) {
             this.errors = e.errors;
           }
           this.helpers.alert().showError(e.error.message);
@@ -146,17 +146,11 @@ export class EditComponent implements OnInit {
     return this.helpers.localization().translate(`${this.module}.${locale}`);
   }
 
-  getCategories(): void {
-    this.api
-      .categories()
-      .getList()
-      .subscribe(
-        (response: any) => {
-          this.categories = response;
-        },
-        (e) => {
-          this.helpers.alert().showError(e.message);
-        }
-      );
+  async getCategories(): Promise<void> {
+    try {
+      this.categories = await this.api.categories().getList();
+    } catch (e) {
+      this.helpers.alert().showError(e.message);
+    }
   }
 }

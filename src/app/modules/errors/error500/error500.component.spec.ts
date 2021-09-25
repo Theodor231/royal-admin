@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { Error500Component } from './error500.component';
+import { Error500Component } from "./error500.component";
 
-describe('Error500Component', () => {
+describe("Error500Component", () => {
   let component: Error500Component;
   let fixture: ComponentFixture<Error500Component>;
 
@@ -18,7 +18,7 @@ describe('Error500Component', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

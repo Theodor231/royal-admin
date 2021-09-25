@@ -1,32 +1,36 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { MustMatch } from 'src/app/_helpers/must-much.validator';
-import { AlertService } from 'src/app/_services/helpers/alert.service';
-import { AuthService } from 'src/app/_services/api/auth.service';
-import { LoaderService } from 'src/app/_services/helpers/loader.service';
-import { RolesService } from 'src/app/_services/api/roles.service';
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
+import { MustMatch } from "src/app/_helpers/must-much.validator";
+import { LoaderService } from "src/app/_services/helpers/loader.service";
+import { HelpersService } from "src/app/_services/helpers.service";
+import { ApiService } from "src/app/api/api.service";
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss'],
+  selector: "app-register",
+  templateUrl: "./register.component.html",
+  styleUrls: ["./register.component.scss"],
 })
 export class RegisterComponent implements OnInit {
   form: FormGroup;
-  emailRegx = /^(([^<>+()\[\]\\.,;:\s@"-#$%&=]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/;
+  emailRegx =
+    /^(([^<>+()\[\]\\.,;:\s@"-#$%&=]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/;
   roles = [];
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private authService: AuthService,
     private loader: LoaderService,
-    private alertService: AlertService,
-    private rolesService: RolesService
+    private helpers: HelpersService,
+    private api: ApiService
   ) {}
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    this.createForm();
+    await this.getRoles();
+  }
+
+  createForm(): void {
     this.form = this.formBuilder.group(
       {
         email: [
@@ -39,13 +43,9 @@ export class RegisterComponent implements OnInit {
         role: [null, Validators.required],
       },
       {
-        validator: MustMatch('password', 'confirmPassword'),
+        validator: MustMatch("password", "confirmPassword"),
       }
     );
-
-    this.rolesService.getList().subscribe((data: Array<any>) => {
-      this.roles = data;
-    });
   }
 
   async submit(): Promise<void> {
@@ -54,15 +54,20 @@ export class RegisterComponent implements OnInit {
       return;
     }
     this.loader.showLocalLoader();
-    this.authService.register(this.form.value).subscribe(
-      () => {
-        this.loader.hideLocalLoader();
-        this.router.navigate(['auth/login']);
-      },
-      (error: any) => {
-        this.loader.hideLocalLoader();
-        this.alertService.showError(error.error.message);
-      }
-    );
+    try {
+      await this.api.auth().register(this.form.value);
+      await this.router.navigate(["auth/login"]);
+    } catch (e) {
+      this.helpers.alert().showError(e.error.message);
+    }
+    this.loader.hideLocalLoader();
+  }
+
+  async getRoles(): Promise<void> {
+    try {
+      this.roles = await this.api.roles().getList();
+    } catch (e) {
+      this.helpers.alert().showError(e.message);
+    }
   }
 }

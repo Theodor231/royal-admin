@@ -1,12 +1,55 @@
-<div class="full-width">
-  <app-header [moduleName]="moduleName"></app-header>
-  <app-side-bar></app-side-bar>
-  <div
-    [class.full-nav]="generalService.showSideBar"
-    class="main-content full-height full-width"
+<div style="display: flex">
+  <mat-list style="padding-top: 63px" color="primary" >
+    <mat-list-item
+      *ngFor="let item of menu"
+      [routerLink]="item.link"
+      routerLinkActive="active"
+      style="display: flex; align-items: center; justify-content: center"
+    >
+      <button mat-icon-button>
+        <mat-icon text="light-gray">{{ item.icon }}</mat-icon>
+      </button>
+    </mat-list-item>
+  </mat-list>
+  <mat-drawer-container
+    class="example-container mat-elevation-z4"
+    style="width: 100%; height: 100vh"
   >
-    <router-outlet></router-outlet>
-  </div>
-  <app-theme></app-theme>
+    <mat-drawer
+      #drawer
+      class="example-sidenav"
+      mode="side"
+      style="height: 100%"
+      color="primary"
+    >
+      <mat-list style="padding-top: 63px; width: 150px">
+        <mat-list-item
+          *ngFor="let item of menu"
+          [routerLink]="item.link"
+          routerLinkActive="active"
+        >
+          <mat-label text="light-gray"> {{ item.text }}</mat-label>
+        </mat-list-item>
+      </mat-list>
+    </mat-drawer>
+    <div>
+      <mat-toolbar color="primary">
+        <mat-toolbar-row class="mat-elevation-z4">
+          <button
+            (click)="drawer.toggle()"
+            mat-icon-button
+            class="example-icon"
+            aria-label="Example icon-button with menu icon"
+          >
+            <mat-icon>menu</mat-icon>
+          </button>
+          <span class="example-spacer"></span>
+        </mat-toolbar-row>
+      </mat-toolbar>
+      <div>
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </mat-drawer-container>
 </div>
 <app-confirm></app-confirm>

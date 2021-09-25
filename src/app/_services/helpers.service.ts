@@ -1,14 +1,14 @@
-import { Injectable } from '@angular/core';
-import { AlertService } from './helpers/alert.service';
-import { ConfirmService } from './helpers/confirm.service';
-import { LoaderService } from './helpers/loader.service';
-import { LocalizationService } from './helpers/localization.service';
-import { serialize } from 'object-to-formdata';
-import moment from 'moment';
-import { GeneralService } from './general.service';
+import { Injectable } from "@angular/core";
+import { AlertService } from "./helpers/alert.service";
+import { ConfirmService } from "./helpers/confirm.service";
+import { LoaderService } from "./helpers/loader.service";
+import { LocalizationService } from "./helpers/localization.service";
+import { serialize } from "object-to-formdata";
+import moment from "moment";
+import { GeneralService } from "./general.service";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class HelpersService {
   constructor(
@@ -36,7 +36,7 @@ export class HelpersService {
     const object = {};
 
     for (const key in form.controls) {
-      if (typeof data[key] !== 'boolean') {
+      if (typeof data[key] !== "boolean") {
         object[key] = data[key] ? data[key] : null;
       } else {
         object[key] = data[key];
@@ -47,9 +47,9 @@ export class HelpersService {
 
   download(file): void {
     if (file.url) {
-      const link = document.createElement('a');
-      link.setAttribute('target', '_blank');
-      link.setAttribute('href', file.url);
+      const link = document.createElement("a");
+      link.setAttribute("target", "_blank");
+      link.setAttribute("href", file.url);
       link.click();
       return;
     }
@@ -74,10 +74,10 @@ export class HelpersService {
       return field;
     }
 
-    return '';
+    return "";
   }
 
-  getDate(date: Date, format = 'DD.MM.YYYY'): any {
+  getDate(date: Date, format = "DD.MM.YYYY"): any {
     return moment(date).format(format);
   }
 }
