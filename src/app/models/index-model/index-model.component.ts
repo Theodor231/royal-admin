@@ -1,4 +1,10 @@
-import { Component, Input, OnInit } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnInit,
+} from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { HelpersService } from "../../_services/helpers.service";
 import { ApiService } from "../../api/api.service";
@@ -8,15 +14,16 @@ import { ActivatedRoute } from "@angular/router";
   selector: "app-index-model",
   templateUrl: "./index-model.component.html",
   styles: [""],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IndexModelComponent implements OnInit {
+  @Input() moduleName = "";
   items = [] as Array<any>;
   headers = [] as Array<any>;
   loading = false;
   pageSizeOptions = [5, 10, 25, 100];
   showFilters = false;
   module;
-  @Input() moduleName = "";
   columnsToDisplay = [];
 
   filter: FormGroup;
@@ -31,8 +38,12 @@ export class IndexModelComponent implements OnInit {
     public helpers: HelpersService,
     public api: ApiService,
     public formBuilder: FormBuilder,
-    public route: ActivatedRoute
+    public route: ActivatedRoute,
+    private ref?: ChangeDetectorRef
   ) {
+    if (this.ref) {
+      this.ref.reattach();
+    }
     this.loading = true;
     this.module = this.moduleName;
     route.params.subscribe((params: any) => {
@@ -82,6 +93,10 @@ export class IndexModelComponent implements OnInit {
 
   async loadData(): Promise<void> {
     this.loading = true;
+    if (this.ref) {
+      this.ref.reattach();
+    }
+
     this.parseFilter();
     try {
       const response = await this.api[this.module]().getData({
@@ -100,10 +115,13 @@ export class IndexModelComponent implements OnInit {
         { value: "actions", text: "", sortable: false, width: "1em" },
       ];
     } catch (e) {
-      console.log(e);
       this.helpers.alert().showError(e.error.message);
     }
     this.loading = false;
+    if (this.ref) {
+      this.ref.detach();
+      console.log(this.ref);
+    }
   }
 
   async changePage(page: any): Promise<void> {

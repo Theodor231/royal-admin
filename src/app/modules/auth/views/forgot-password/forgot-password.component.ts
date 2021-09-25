@@ -4,7 +4,7 @@ import { Router } from "@angular/router";
 import { AlertService } from "src/app/_services/helpers/alert.service";
 import { AuthService } from "src/app/api/modules/auth.service";
 import { LoaderService } from "src/app/_services/helpers/loader.service";
-import {LocalizationService} from "../../../../_services/helpers/localization.service";
+import { LocalizationService } from "../../../../_services/helpers/localization.service";
 
 @Component({
   selector: "app-forgot-password",
