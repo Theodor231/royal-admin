@@ -22,9 +22,7 @@ export class AuthService extends ModelService {
 
   async forgotPassword(email): Promise<any> {
     return this.http
-      .get(`${this.resourceUrl}/reset_password_step_1`, {
-        params: { email },
-      })
+      .post(`${this.resourceUrl}/reset_password_step_1`, { email })
       .toPromise();
   }
 

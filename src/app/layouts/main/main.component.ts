@@ -19,11 +19,6 @@ export class MainComponent implements OnDestroy, OnInit {
   activeLang = "en";
   menu = [
     {
-      text: "Home",
-      icon: "home",
-      link: "/",
-    },
-    {
       text: "category",
       icon: "category",
       link: "categories",
@@ -42,11 +37,6 @@ export class MainComponent implements OnDestroy, OnInit {
       text: "Roles",
       icon: "people_alt",
       link: "roles",
-    },
-    {
-      text: "Exit",
-      icon: "logout",
-      link: "item",
     },
   ] as Array<{
     text: string;
@@ -96,10 +86,9 @@ export class MainComponent implements OnDestroy, OnInit {
   async logout(): Promise<void> {
     this.confirmService.setConfirm({
       accept: async () => {
-        this.authService.logout();
-
+        await this.authService.logout();
         localStorage.removeItem("credentials");
-        this.router.navigateByUrl("/auth");
+        await this.router.navigateByUrl("/auth");
       },
       title: "Logout!",
       message: "Are you sure you want to exit?",

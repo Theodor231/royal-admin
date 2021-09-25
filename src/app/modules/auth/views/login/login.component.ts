@@ -4,7 +4,8 @@ import { Router } from "@angular/router";
 import { AlertService } from "src/app/_services/helpers/alert.service";
 import { AuthService } from "src/app/api/modules/auth.service";
 import { LoaderService } from "src/app/_services/helpers/loader.service";
-import { GeneralService } from "../../../../_services/general.service";
+import { GeneralService } from "src/app/_services/general.service";
+import { LocalizationService } from "src/app/_services/helpers/localization.service";
 
 @Component({
   selector: "app-login",
@@ -13,6 +14,7 @@ import { GeneralService } from "../../../../_services/general.service";
 })
 export class LoginComponent implements OnInit {
   form: FormGroup;
+  errors = {} as any;
   emailRegx =
     /^(([^<>+()\[\]\\.,;:\s@"-#$%&=]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/;
 
@@ -22,7 +24,8 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private loaderService: LoaderService,
     private alertService: AlertService,
-    private generalService: GeneralService
+    private generalService: GeneralService,
+    private localizationService: LocalizationService
   ) {}
 
   ngOnInit(): void {
@@ -53,5 +56,39 @@ export class LoginComponent implements OnInit {
       this.loaderService.hideLocalLoader();
       this.alertService.showError(e.error.message);
     }
+  }
+
+  getErrorMessage(field: string): string {
+    const error = this.form.controls[field] as any;
+
+    if (this.errors[field]) {
+      return this.errors[field];
+    }
+
+    if (error.hasError("required")) {
+      return this.localizationService.translate("global_validation.required");
+    }
+
+    if (error.hasError("minlength")) {
+      return `${this.localizationService.translate(
+        "global_validation.minlength"
+      )} ${error.errors.minlength.requiredLength} (${
+        error.errors.minlength.actualLength
+      })`;
+    }
+
+    if (error.hasError("maxlength")) {
+      return `${this.localizationService.translate(
+        "global_validation.maxlength"
+      )} ${error.errors.maxlength.requiredLength} (${
+        error.errors.maxlength.actualLength
+      }). `;
+    }
+
+    if (error.hasError("email")) {
+      return "Not a valid email";
+    }
+
+    return "";
   }
 }

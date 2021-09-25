@@ -10,6 +10,7 @@ import { ForgotPasswordComponent } from "src/app/modules/auth/views/forgot-passw
 import { LoginComponent } from "src/app/modules/auth/views/login/login.component";
 import { RegisterComponent } from "src/app/modules/auth/views/register/register.component";
 import { ResetComponent } from "src/app/modules/auth/views/reset/reset.component";
+import { MaterialModule } from "../../plugins/material/material.module";
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { ResetComponent } from "src/app/modules/auth/views/reset/reset.component
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
+    MaterialModule,
   ],
 })
 export class AuthModule {}

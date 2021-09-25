@@ -1,32 +1,22 @@
-<div class="position-relative">
-  <div class="d-flex align-center">
-    <img
-      width="30px"
-      [src]="activeLanguage.icon"
-      class="cursor-pointer"
-      [alt]="activeLanguage.text"
-      (click)="toggle()"
-    />
-    <span class="material-icons">arrow_drop_down</span>
-  </div>
-  <div
-    class="absolute box-shadow"
-    style="top: 40px; left: -60px"
-    color="light"
-    text="dark"
-    *ngIf="showLanguages"
-  >
-    <div
-      *ngFor="let item of items"
-      class="d-flex px-15 py-5 align-center cursor-pointer hover"
-      (click)="changeLanguage(item)"
-    >
-      <div *ngIf="item && item.icon">
-        <img width="30px" [src]="item.icon" alt="" />
-      </div>
-      <div class="ml-5" style="font-size: 14px">
-        {{ item.text }}
-      </div>
-    </div>
-  </div>
+<div class="d-flex align-center" [matMenuTriggerFor]="menu">
+  <img
+    width="30px"
+    [src]="activeLanguage.icon"
+    class="cursor-pointer"
+    [alt]="activeLanguage.text"
+    (click)="toggle()"
+  />
+  <span class="material-icons">arrow_drop_down</span>
 </div>
+<mat-menu #menu="matMenu">
+  <button
+    mat-menu-item
+    *ngFor="let item of items"
+    (click)="changeLanguage(item)"
+  >
+    <mat-label class="d-flex align-center">
+      <img width="30px" [src]="item.icon" alt="" />
+      <span class="ml-5">{{ item.text }}</span>
+    </mat-label>
+  </button>
+</mat-menu>
