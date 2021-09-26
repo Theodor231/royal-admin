@@ -11,6 +11,7 @@
   (sort)="sortData($event)"
   (update)="loadData()"
   (filter)="toggleFilters()"
+  (resetParams)="resetFilter()"
 >
   <form [formGroup]="filter">
     <mat-grid-list cols="12" rowHeight="100px">

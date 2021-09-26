@@ -18,19 +18,21 @@
           'create'
         ]"
       >
-        <mat-icon>add</mat-icon>
-        <mat-label class="ml-5">create {{ module }}</mat-label>
+        <div class="d-flex align-center">
+          <icon>add</icon>
+          <mat-label class="ml-5">create {{ module }}</mat-label>
+        </div>
       </button>
       <div>
         <button mat-icon-button (click)="loadData()">
-          <mat-icon>refresh</mat-icon>
+          <icon>refresh</icon>
         </button>
         <button
           mat-icon-button
           (click)="toggleFilter()"
           style="margin-right: 10px"
         >
-          <mat-icon>filter_alt</mat-icon>
+          <icon>filter_alt</icon>
         </button>
       </div>
     </div>
@@ -39,8 +41,10 @@
       <ng-content></ng-content>
       <mat-card-actions>
         <div class="d-flex align-center justify-end full-width">
-          <button mat-flat-button>cancel</button>
-          <button mat-raised-button color="primary" (click)="loadData()">Apply</button>
+          <button mat-flat-button (click)="resetFilter()">reset</button>
+          <button mat-raised-button color="primary" (click)="loadData()">
+            Apply
+          </button>
         </div>
       </mat-card-actions>
     </div>
@@ -73,14 +77,26 @@
           </td>
         </ng-container>
         <ng-container *ngSwitchCase="'actions'">
-          <td mat-cell *matCellDef="let row">
-            <div>
+          <td
+            mat-cell
+            *matCellDef="let row"
+            style="width: 50px; padding: 0 !important"
+            class="pa-0"
+          >
+            <div class="d-flex align-center">
               <button
                 mat-icon-button
                 color="error"
                 (click)="openConfirm(row.id)"
               >
-                <mat-icon>delete</mat-icon>
+                <icon size="16">delete</icon>
+              </button>
+              <button
+                mat-icon-button
+                color="gray"
+                [routerLink]="['../../edit', row.id]"
+              >
+                <icon size="16">edit</icon>
               </button>
             </div>
           </td>

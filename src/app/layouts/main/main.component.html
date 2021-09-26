@@ -7,12 +7,12 @@
       style="display: flex; align-items: center; justify-content: center"
     >
       <button mat-icon-button>
-        <mat-icon text="light-gray">{{ item.icon }}</mat-icon>
+        <icon text="light-gray">{{ item.icon }}</icon>
       </button>
     </mat-list-item>
     <mat-list-item (click)="logout()">
       <button mat-icon-button>
-        <mat-icon text="light-gray">logout</mat-icon>
+        <icon text="light-gray">logout</icon>
       </button>
     </mat-list-item>
   </mat-list>
@@ -27,7 +27,7 @@
       style="height: 100%"
       color="primary"
     >
-      <mat-list style="padding-top: 63px; width: 150px">
+      <mat-list style="padding-top: 63px; width: 150px" color="primary" class="full-height">
         <mat-list-item
           *ngFor="let item of menu"
           [routerLink]="item.link"
@@ -50,7 +50,7 @@
             mat-icon-button
             class="example-icon"
           >
-            <mat-icon>menu</mat-icon>
+            <icon>menu</icon>
           </button>
           <span class="example-spacer"></span>
           <lang-switcher></lang-switcher>

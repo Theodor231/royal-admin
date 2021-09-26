@@ -8,7 +8,7 @@ import {
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { HelpersService } from "../../_services/helpers.service";
 import { ApiService } from "../../api/api.service";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: "app-index-model",
@@ -39,6 +39,7 @@ export class IndexModelComponent implements OnInit {
     public api: ApiService,
     public formBuilder: FormBuilder,
     public route: ActivatedRoute,
+    public router?: Router,
     private ref?: ChangeDetectorRef
   ) {
     if (this.ref) {
@@ -148,6 +149,12 @@ export class IndexModelComponent implements OnInit {
         this.params.filter[key] = this.filter.value[key];
       }
     }
+    this.router
+      .navigate(["."], {
+        relativeTo: this.route,
+        queryParams: this.params.filter,
+      })
+      .then((r) => r);
   }
 
   toggleFilter(): void {

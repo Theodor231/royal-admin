@@ -21,6 +21,7 @@ export class DataTableComponent implements OnInit {
   @Output() confirm = new EventEmitter();
   @Output() update = new EventEmitter();
   @Output() filter = new EventEmitter();
+  @Output() resetParams = new EventEmitter();
 
   constructor(public helpers: HelpersService) {}
 
@@ -43,5 +44,9 @@ export class DataTableComponent implements OnInit {
   }
   changePage(event: any): void {
     this.page.emit(event);
+  }
+
+  resetFilter(): void {
+    this.resetParams.emit();
   }
 }
