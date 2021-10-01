@@ -11,6 +11,7 @@ import { ComponentsModule } from "./components/components.module";
 import { DirectivesModule } from "./directives/directives.module";
 import { RouterModule, Routes } from "@angular/router";
 import { MaterialModule } from "./plugins/material/material.module";
+import { CreateModelComponent } from "./models/create-model/create-model.component";
 
 const routes: Routes = [
   {
@@ -26,7 +27,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, CreateModelComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

@@ -1,27 +1,7 @@
-<div class="input-block my-5" *ngIf="control">
-  <div
-    class="form__input"
-    [class.required]="
-      control.errors && control.errors.required && control.touched
-    "
-  >
-    <small *ngIf="control.value" class="form__input--label" text="text">{{ label }}*</small>
-    <div class="d-flex full-width align-center">
-      <div [class]="icon" style="font-size: 16px"></div>
-      <input
-        [class.wrong]="control.errors && !control.value && control.touched"
-        [placeholder]="label"
-        [type]="type"
-        [formControl]="control"
-      />
-    </div>
-  </div>
-  <span class="form__error text-left">
-    <small
-      class="form__error--text"
-      [class.display-error]="showErrors() || error"
-    >
-      <span> {{ helpers.getErrors(error, control) }} </span>
-    </small>
-  </span>
-</div>
+<mat-form-field [appearance]="appearance" class="full-width mx-10">
+  <mat-label [translate]="label"> {{ label }}</mat-label>
+  <input [placeholder]="label" [type]="type" matInput [formControl]="control" />
+  <mat-error *ngIf="showErrors()">
+    {{ this.helpers.getErrors(this.error, this.control) }}
+  </mat-error>
+</mat-form-field>

@@ -18,6 +18,9 @@ export class FormSelectComponent implements OnInit {
   @Input() field;
   @Input() error = "" as string;
   @Input() items = [] as Array<any>;
+  @Input() multiple = false as boolean;
+  @Input() disabled = false as boolean;
+  @Input() appearance = "outline" as any;
 
   selectedItem = { text: "" } as any;
   showItems = false as boolean;

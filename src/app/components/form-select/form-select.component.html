@@ -1,60 +1,15 @@
-<div class="input-block full-width">
-  <div
-    class="form__input full-width"
-    [class.required]="
-      control.errors && control.errors.required && control.touched
-    "
+<mat-form-field [appearance]="appearance" class="full-width mx-10">
+  <mat-select
+    [multiple]="multiple"
+    [placeholder]="label"
+    [formControl]="control"
+    [disabled]="disabled"
   >
-    <small
-      class="form__input--label"
-      *ngIf="control.touched || control.value"
-      text="text"
-      >{{ label }}*</small
-    >
-    <div class="full-width position-relative">
-      <div class="select">
-        <input
-          type="text"
-          readonly
-          text="text"
-          [value]="selectedItem[itemText]"
-          class="select__selection"
-          (click)="toggle()"
-        />
-        <div class="select__items elevation-1" *ngIf="showItems">
-          <ng-container *ngIf="items.length">
-            <div
-              class="select__items--item"
-              *ngFor="let item of items"
-              text="text"
-              (click)="selectItem(item)"
-            >
-              {{ item.text }}
-            </div>
-          </ng-container>
-          <ng-container *ngIf="!items.length">
-            <div class="d-flex align-center justify-center full-width">
-              <span text="text">No items.</span>
-            </div>
-          </ng-container>
-        </div>
-      </div>
-      <div
-        *ngIf="!control.touched && !control.value"
-        class="form__input--label position-absolute"
-        style="top: 10px; left: 7px; font-size: 14px"
-        color="placeholder"
-      >
-        {{ label }}*
-      </div>
-    </div>
-  </div>
-  <div class="form__error text-left">
-    <small
-      class="form__error--text"
-      [class.display-error]="showErrors() || error"
-    >
-      <span> {{ helpers.getErrors(error, control) }} </span>
-    </small>
-  </div>
-</div>
+    <mat-option *ngFor="let item of items" [value]="item[itemValue]">
+      {{ item[itemText] }}
+    </mat-option>
+  </mat-select>
+  <mat-error *ngIf="showErrors()">
+    {{ this.helpers.getErrors(this.error, this.control) }}
+  </mat-error>
+</mat-form-field>

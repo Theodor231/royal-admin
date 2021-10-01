@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  api: "https://royal-api.testways.online",
+  api: "http://api.powerit.loc:3000",
 };

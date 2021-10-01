@@ -5,17 +5,12 @@
       <form [formGroup]="form">
         <mat-grid-list cols="12" rowHeight="100px">
           <mat-grid-tile colspan="4">
-            <mat-form-field appearance="outline" class="full-width mx-5">
-              <mat-label translate="roles.fields.name"> name</mat-label>
-              <input
-                matInput
-                placeholder="Placeholder"
-                [formControl]="form.controls.name"
-              />
-              <mat-error *ngIf="getErrorMessage('name')">
-                {{ getErrorMessage("name") }}
-              </mat-error>
-            </mat-form-field>
+            <form-input
+              label="roles.fields.name"
+              [control]="form.controls.name"
+              [error]="errors.name"
+            >
+            </form-input>
           </mat-grid-tile>
           <mat-grid-tile colspan="4">
             <mat-form-field appearance="outline" class="full-width mx-5">
