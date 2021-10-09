@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  api: "http://api.powerit.loc:3000",
+  api: process.env.API_SERVER_URL,
 };
