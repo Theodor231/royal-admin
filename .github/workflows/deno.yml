@@ -35,7 +35,6 @@ jobs:
     steps:
       - name: Setup local env
         run: |
-          rm .env
           echo API_SERVER_URL=http://api.powerit.loc:3000 >> .env
           npm run build
       - name: Log in to the Container registry
