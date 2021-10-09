@@ -3,40 +3,33 @@
     <mat-card-title>Create</mat-card-title>
     <mat-card-content class="mt-20">
       <form [formGroup]="form">
-        <mat-grid-list cols="12" rowHeight="100px">
+        <mat-grid-list cols="12" rowHeight="60px">
           <mat-grid-tile colspan="4">
             <form-input
-              label="roles.fields.name"
+              [dense]="true"
+              [label]="$t('roles.fields.name')"
               [control]="form.controls.name"
               [error]="errors.name"
             >
             </form-input>
           </mat-grid-tile>
           <mat-grid-tile colspan="4">
-            <mat-form-field appearance="outline" class="full-width mx-5">
-              <mat-label translate="roles.fields.alias"> alias</mat-label>
-              <input
-                matInput
-                placeholder="Placeholder"
-                [formControl]="form.controls.alias"
-              />
-              <mat-error *ngIf="getErrorMessage('alias')">
-                {{ getErrorMessage("alias") | json }}
-              </mat-error>
-            </mat-form-field>
+            <form-input
+                    [dense]="true"
+              [label]="$t('roles.fields.alias')"
+              [control]="form.controls.alias"
+              [error]="errors.alias"
+            >
+            </form-input>
           </mat-grid-tile>
           <mat-grid-tile colspan="4">
-            <mat-form-field appearance="outline" class="full-width mx-5">
-              <mat-label translate="Guard"> guard</mat-label>
-              <input
-                matInput
-                placeholder="Placeholder"
-                [formControl]="form.controls.guard"
-              />
-              <mat-error *ngIf="getErrorMessage('guard')">
-                {{ getErrorMessage("guard") | json }}
-              </mat-error>
-            </mat-form-field>
+            <form-input
+                    [dense]="true"
+              label="Guard"
+              [control]="form.controls.guard"
+              [error]="errors.guard"
+            >
+            </form-input>
           </mat-grid-tile>
         </mat-grid-list>
       </form>

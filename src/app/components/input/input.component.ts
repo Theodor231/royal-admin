@@ -17,6 +17,7 @@ export class InputComponent {
   @Input() field;
   @Input() error = "" as string;
   @Input() appearance = "outline" as any;
+  @Input() dense = false as boolean;
 
   constructor(public helpers: HelpersService) {}
 

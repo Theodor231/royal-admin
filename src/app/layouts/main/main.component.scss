@@ -18,3 +18,9 @@
     color: var(--light) !important;
   }
 }
+
+.menu__item::ng-deep {
+  .mat-list-item-content {
+    padding: 0 10px !important;
+  }
+}

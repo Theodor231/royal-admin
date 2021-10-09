@@ -1,19 +1,21 @@
-<div style="display: flex">
-  <mat-list style="padding-top: 63px" color="primary">
+<div class="d-flex">
+  <mat-list style="padding-top: 63px; width: 60px" color="primary">
     <mat-list-item
       *ngFor="let item of menu"
       [routerLink]="item.link"
       routerLinkActive="active"
       style="display: flex; align-items: center; justify-content: center"
+      class="menu__item d-flex align-center justify-center cursor-pointer"
+      disableRipple
     >
-      <button mat-icon-button>
-        <icon text="light-gray">{{ item.icon }}</icon>
-      </button>
+      <icon text="light-gray" size="20">{{ item.icon }}</icon>
     </mat-list-item>
-    <mat-list-item (click)="logout()">
-      <button mat-icon-button>
-        <icon text="light-gray">logout</icon>
-      </button>
+    <mat-list-item
+      (click)="logout()"
+      class="menu__item d-flex align-center justify-center cursor-pointer"
+      [class.box-shadow]="!drawer.opened"
+    >
+      <icon size="20" text="light-gray">logout</icon>
     </mat-list-item>
   </mat-list>
   <mat-drawer-container
@@ -27,7 +29,11 @@
       style="height: 100%"
       color="primary"
     >
-      <mat-list style="padding-top: 63px; width: 150px" color="primary" class="full-height">
+      <mat-list
+        style="padding-top: 63px; width: 150px"
+        color="primary"
+        class="full-height"
+      >
         <mat-list-item
           *ngFor="let item of menu"
           [routerLink]="item.link"

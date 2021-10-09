@@ -169,7 +169,6 @@ $primary: var(--primary);
   overflow-x: auto;
 }
 
-
 .table-body {
   position: relative;
   width: 100%;
@@ -248,3 +247,7 @@ icon {
 .text-wrap {
   white-space: normal !important;
 }
+form-input {
+  width: 100%;
+}
+

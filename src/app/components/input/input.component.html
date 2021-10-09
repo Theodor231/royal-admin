@@ -1,7 +1,15 @@
-<mat-form-field [appearance]="appearance" class="full-width mx-10">
-  <mat-label [translate]="label"> {{ label }}</mat-label>
-  <input [placeholder]="label" [type]="type" matInput [formControl]="control" />
-  <mat-error *ngIf="showErrors()">
-    {{ this.helpers.getErrors(this.error, this.control) }}
-  </mat-error>
-</mat-form-field>
+<div class="full-width px-8 form__input" [class.dense]="dense">
+  <mat-form-field [appearance]="appearance" class="full-width">
+    <mat-label [translate]="label"> {{ label }}</mat-label>
+    <input
+      [placeholder]="label"
+      [type]="type"
+      matInput
+      [formControl]="control"
+      class="full-width"
+    />
+    <mat-error *ngIf="showErrors()">
+      {{ this.helpers.getErrors(this.error, this.control) }}
+    </mat-error>
+  </mat-form-field>
+</div>
